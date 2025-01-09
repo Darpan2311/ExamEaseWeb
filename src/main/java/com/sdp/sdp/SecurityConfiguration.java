@@ -47,30 +47,16 @@ public class SecurityConfiguration {
                     registry.requestMatchers("/user/**").hasRole("USER");
                     registry.anyRequest().authenticated();
                 })
-                .formLogin(AbstractAuthenticationFilterConfigurer::permitAll)
+                //.formLogin(AbstractAuthenticationFilterConfigurer::permitAll)
                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-//                .formLogin(httpSecurityFormLoginConfigurer ->
-//                {
-//                    httpSecurityFormLoginConfigurer.loginPage("/login")
-//                            .successHandler(new AuthenticationSuccessHandler()).permitAll();
-//                })
+                .formLogin(httpSecurityFormLoginConfigurer ->
+                {
+                    httpSecurityFormLoginConfigurer.loginPage("/login")
+                            .successHandler(new AuthenticationSuccessHandler()).permitAll();
+                })
                 .build();
     }
 
-//    @Bean
-//    public UserDetailsService userDetailsService() {
-//        UserDetails user = User.builder()
-//                .username("dv")
-//                .password("$2a$12$nY8MvlAc7/WXdrNlGztpSepmATtQUHLG6Gp4uyezA3ZbOpt6datka")
-//                .roles("USER")
-//                .build();
-//        UserDetails admin = User.builder()
-//                .username("admin")
-//                .password("$2a$12$GEBhSCkFnHabOrsrLOBwUOEKa.1T8fYN74Hc.Op1hOwkjSgiChZPe")
-//                .roles("ADMIN","USER")
-//                .build();
-//        return new InMemoryUserDetailsManager(user,admin);
-//    }
     @Bean
     public UserDetailsService userDetailsService() {
         return myUserDetailService;

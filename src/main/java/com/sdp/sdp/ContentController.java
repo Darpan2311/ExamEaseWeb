@@ -20,7 +20,7 @@ public class ContentController {
     JwtService jwtService;
     @Autowired
     MyUserDetailService myUserDetailService;
-    @GetMapping("/home")
+    @PostMapping("/home")
     public String handleWelcome() {
         return "home";
     }
@@ -30,15 +30,15 @@ public class ContentController {
         return "home_admin";
     }
 
-    @GetMapping("/user/home")
+    @PostMapping("/user/home")
     public String handleUserHome() {
         return "home_user";
     }
 
-//    @RequestMapping("/login")
-//    public String handleLogin() {
-//        return "customlogin";
-//    }
+    @RequestMapping("/login")
+    public String handleLogin() {
+        return "customlogin";
+    }
 
 //    @PostMapping("/authenticate")
 //    public String AuthenticateAndGetToken(@RequestBody LoginForm form) {
