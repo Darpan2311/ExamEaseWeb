@@ -12,6 +12,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+
+// kunj vasoya
 @Controller
 public class ContentController {
     @Autowired
@@ -20,6 +22,7 @@ public class ContentController {
     JwtService jwtService;
     @Autowired
     MyUserDetailService myUserDetailService;
+
     @PostMapping("/home")
     public String handleWelcome() {
         return "home";
@@ -52,6 +55,9 @@ public class ContentController {
 //            throw new UsernameNotFoundException("Invalid username or password");
 //        }
 //    }
+
+
+
     @PostMapping("/authenticate")
     public ResponseEntity<String> AuthenticateAndGetToken(@RequestBody LoginForm form) {
         Authentication authentication = authenticationManager.authenticate(
