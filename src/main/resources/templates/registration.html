@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div class="login-container">
+    <h1>Create Account</h1>
+    <form action="#" th:action="@{/register/user}" method="post">
+        <div class="input-group">
+            <label for="username">Email</label>
+            <input type="text" id="username" name="username" placeholder="Enter your email" required>
+        </div>
+        <div class="input-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            <button type="button" id="show-password">Show</button>
+        </div>
+        <div class="input-group">
+            <label for="confirm-password">Confirm Password</label>
+            <input type="password" id="confirm-password" name="confirmPassword" placeholder="Confirm your password" required>
+        </div>
+        <div class="input-group">
+            <label for="role">Role</label>
+            <input type="text" id="role" name="role" placeholder="Enter your role" required>
+        </div>
+        <button type="submit" class="btn-login">Sign Up</button>
+        <p class="create-account">Already have an account? <a href="/login">Log In</a></p>
+    </form>
+
+
+
+</div>
+
+<script>
+    // JavaScript to toggle password visibility
+    document.getElementById('show-password').addEventListener('click', function () {
+        const passwordInput = document.getElementById('password');
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            this.textContent = 'Hide';
+        } else {
+            passwordInput.type = 'password';
+            this.textContent = 'Show';
+        }
+
+
+    });
+</script>
+</body>
+</html>
