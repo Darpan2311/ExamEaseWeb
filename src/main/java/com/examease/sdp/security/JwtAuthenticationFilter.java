@@ -31,15 +31,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         String authHeader = request.getHeader("Authorization");
 
-        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            if (isProtectedEndpoint(request)) {
-                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Authorization header is missing or invalid");
-                return;
-            }
+        if ( !isProtectedEndpoint(request)) {
+
             chain.doFilter(request, response);
             return;
+        } else if (authHeader == null || !authHeader.startsWith("Bearer ") ) {
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Authorization header is missing or invalid");
+            return;
         }
-
         String token = authHeader.substring(7);
         String username = jwtService.extractUsername(token);
 

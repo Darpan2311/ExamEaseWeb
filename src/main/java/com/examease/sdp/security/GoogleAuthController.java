@@ -6,24 +6,17 @@ import com.examease.sdp.model.MyUserRepo;
 import com.nimbusds.oauth2.sdk.util.MultivaluedMapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.*;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/api/auth/google")
 public class GoogleAuthController {
@@ -45,11 +38,15 @@ public class GoogleAuthController {
     @Autowired
     private MyUserRepo userRepo;
 
+    @PostMapping("/callback")
+    public ResponseEntity<?> handleGoogleCallback(@RequestBody Map<String, String> body) {
+        String code = body.get("code");
 
+        if (code == null || code.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Missing or invalid authorization code.");
+        }
 
-    @GetMapping("/callback")
-    public ResponseEntity<?> handleGoogleCallback(@RequestParam String code) {
-        RestTemplate restTemplate = new RestTemplate(); // Direct instantiation
+        RestTemplate restTemplate = new RestTemplate();
 
         try {
             // Step 1: Exchange authorization code for an access token
@@ -59,7 +56,7 @@ public class GoogleAuthController {
             params.add("code", code);
             params.add("client_id", clientId);
             params.add("client_secret", clientSecret);
-            params.add("redirect_uri", redirectUri); // Use the externalized redirect URI
+            params.add("redirect_uri", redirectUri);
             params.add("grant_type", "authorization_code");
 
             HttpHeaders headers = new HttpHeaders();
@@ -70,9 +67,12 @@ public class GoogleAuthController {
 
             if (response.getStatusCode() == HttpStatus.OK) {
                 Map<String, Object> tokenResponse = response.getBody();
+                if (tokenResponse == null || !tokenResponse.containsKey("access_token")) {
+                    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Failed to retrieve access token.");
+                }
+
                 String accessToken = (String) tokenResponse.get("access_token");
 
-                // Step 2: Use the access token to get user details from Google
                 String userInfoEndpoint = "https://www.googleapis.com/oauth2/v2/userinfo";
 
                 HttpHeaders userHeaders = new HttpHeaders();
@@ -83,33 +83,41 @@ public class GoogleAuthController {
 
                 if (userResponse.getStatusCode() == HttpStatus.OK) {
                     Map<String, Object> userInfo = userResponse.getBody();
-                    String email = (String) userInfo.get("email");
-
-
-                       UserDetails userDetails= myUserDetailService.loadUserByUsername(email);
-                    if(userDetails==null){
-                        MyUser user = new MyUser();
-                        user.setEmail(email);
-                        user.setUsername(email);
-                        user.setPassword(passwordEncoder.encode(UUID.randomUUID().toString()));
-                        user.setRole("USER");
-                        userRepo.save(user);
-                        userDetails = myUserDetailService.loadUserByUsername(email);
+                    if (userInfo == null || !userInfo.containsKey("email")) {
+                        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Failed to fetch email from Google user info.");
                     }
 
+                    String email = (String) userInfo.get("email");
+
+                    MyUser user = userRepo.findByEmail(email).orElse(null);
+                    if (user == null) {
+                        // Register new user
+                        user = new MyUser();
+                        user.setEmail(email);
+                        user.setUsername(email);
+                        user.setPassword(passwordEncoder.encode(UUID.randomUUID().toString())); // Random password
+                        user.setRole("USER");
+
+                            userRepo.save(user);
+                    }
+                    else {
+                        return ResponseEntity.status(HttpStatus.CONFLICT)
+                                .body(Map.of("message", "User with this email already exists. Please log in."));
+                    }
+
+                    UserDetails userDetails = myUserDetailService.loadUserByUsername(email);
                     String token = jwtService.generateToken(userDetails);
+                    return ResponseEntity.ok(Map.of("token", token));
 
-                    return ResponseEntity.ok(token);
-
-
+                } else {
+                    return ResponseEntity.status(userResponse.getStatusCode()).body("Failed to fetch user information from Google.");
                 }
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Failed to fetch user information.");
+            } else {
+                return ResponseEntity.status(response.getStatusCode()).body("Failed to authenticate with Google: " + response.getBody());
             }
-
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Failed to authenticate with Google.");
         } catch (Exception e) {
             e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred during Google authentication.");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred during Google authentication: " + e.getMessage());
         }
     }
 }
