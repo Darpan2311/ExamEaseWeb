@@ -53,6 +53,11 @@ const LoginPage = () => {
         }
     };
     
+    const handleGoogleLogin = () => {
+        const googleOAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=435399769597-9imjl67qptanmrq6deach9ocicpmfrq3.apps.googleusercontent.com&redirect_uri=http://localhost:5173/api/auth/login/callback&response_type=code&scope=openid%20profile%20email`;
+        window.location.href = googleOAuthUrl;
+    };
+    
     
 
     return (
@@ -97,8 +102,7 @@ const LoginPage = () => {
                     <span>or</span>
                 </div>
                 <div className="social-login">
-                    <button type="button" className="btn-google">Google</button>
-                    <button type="button" className="btn-apple">Apple</button>
+                    <button type="button" className="btn-google" onClick={handleGoogleLogin}>Google</button>
                 </div>
                 <p className="create-account">New to ExamEase? <a href="/register">Create an account</a></p>
             </form>
