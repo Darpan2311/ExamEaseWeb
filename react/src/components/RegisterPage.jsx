@@ -48,17 +48,50 @@ const RegisterPage = () => {
 
     return (
         <div className="register-container">
-            <h1>Create Account</h1>
-            <form onSubmit={handleSubmit}>
-                <input type="text" name="email" placeholder="Email" onChange={handleChange} required />
-                <input type="text" name="username" placeholder="Username" onChange={handleChange} required />
-                <input type="password" name="password" placeholder="Password" onChange={handleChange} required />
-                <input type="password" name="confirmPassword" placeholder="Confirm Password" onChange={handleChange} required />
-                <input type="text" name="role" placeholder="Role" onChange={handleChange} required />
-                <button type="submit">Sign Up</button>
-                <button type="submit" onClick={handleGoogleSignIn}>Google</button>
-            </form>
+    <h1>Create Account</h1>
+    <form onSubmit={handleSubmit}>
+        {/* Email Field */}
+        <div className="input-group">
+            <label htmlFor="email">Email</label>
+            <input type="text" id="email" name="email" placeholder="Email" onChange={handleChange} required />
         </div>
+
+        {/* Username Field */}
+        <div className="input-group">
+            <label htmlFor="username">Username</label>
+            <input type="text" id="username" name="username" placeholder="Username" onChange={handleChange} required />
+        </div>
+
+        {/* Password Field */}
+        <div className="input-group">
+            <label htmlFor="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Password" onChange={handleChange} required />
+        </div>
+
+    
+
+        {/* Role Selection */}
+        <div className="role-group">
+            <label>Select Role</label>
+            <div className="checkbox-group">
+                <label>
+                    <input type="checkbox" name="role" value="USER" onChange={handleChange} /> USER
+                </label>
+                <label>
+                    <input type="checkbox" name="role" value="TEACHER" onChange={handleChange} /> TEACHER
+                </label>
+            </div>
+        </div>
+
+        {/* Buttons */}
+        <button type="submit">Sign Up</button>
+        <div className="separator">
+                    <span>or</span>
+                </div>
+        <button type="button" onClick={handleGoogleSignIn}>Sign Up with Google</button>
+    </form>
+</div>
+
     );
 };
 
