@@ -1,0 +1,47 @@
+
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #181b2c; /* Updated background color */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: #fff; /* Updated font color to white */
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff; /* Updated font color to white */
+}
+
+.navbar-links {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+  padding-left: 950px; 
+}
+
+.navbar-links a {
+  text-decoration: none;
+  color: #fff; /* Updated link color to white */
+  font-weight: 500;
+}
+
+.navbar-buttons .btn {
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.navbar-buttons .login {
+  background: none;
+  color: #fff; /* Updated login button color to white */
+}
+
+.navbar-buttons .signup {
+  background-color: #ff6f47;
+  color: #fff;
+}
