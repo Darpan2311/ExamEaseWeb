@@ -88,7 +88,7 @@ const RegisterPage = () => {
         <div className="separator">
                     <span>or</span>
                 </div>
-        <button type="button" onClick={handleGoogleSignIn}>Sign Up with Google</button>
+        <button type="button" className='social-login' onClick={handleGoogleSignIn}>Google</button>
     </form>
 </div>
 

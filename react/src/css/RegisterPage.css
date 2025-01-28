@@ -16,9 +16,10 @@ body {
 .register-container {
     color: rgba(243, 244, 246, 1);
     padding: 40px;
-    background: linear-gradient(to bottom, #000, #1f2937); 
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    border: 1px solid #444c56;
+    border-radius: 5px;
+    box-shadow: 0 4px 20px rgba(18, 12, 26, 0.3);
+  
     text-align: center;
     width: 100%;
     max-width: 400px;
@@ -121,20 +122,22 @@ button:hover {
 }
 
 /* Google Sign-In Button */
-button:nth-of-type(2) {
-    
-    background: none;
-    border: 1px solid #3498db;
-    color: #fff;
+.social-login {
+    width: 50%;
+    margin-top: auto;
     font-size: 14px;
+    color: #fff; /* Matches text theme */
+    background: none; /* Removed background color */
+    border: 1px solid #3498db;
+    border-radius: 5px;
+    cursor: pointer;
     transition: transform 0.2s ease, opacity 0.3s ease;
 }
 
-button:nth-of-type(2):hover {
+.social-login:hover {
     opacity: 0.9;
     transform: translateY(-3px);
 }
-
 /* Error Message */
 .error-message {
     color: #e74c3c;

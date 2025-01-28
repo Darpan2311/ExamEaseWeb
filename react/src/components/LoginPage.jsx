@@ -10,7 +10,6 @@ const LoginPage = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
 
-     // Import your Axios instance
      const navigate = useNavigate();
      const handleSubmit = async (event) => {
         event.preventDefault();
@@ -101,8 +100,8 @@ const LoginPage = () => {
                 <div className="separator">
                     <span>or</span>
                 </div>
-                <div className="social-login">
-                    <button type="button" className="btn-google" onClick={handleGoogleLogin}>Google</button>
+                <div >
+                    <button type="button" className="social-login" onClick={handleGoogleLogin}>Google</button>
                 </div>
                 <p className="create-account">New to ExamEase? <a href="/register">Create an account</a></p>
             </form>
