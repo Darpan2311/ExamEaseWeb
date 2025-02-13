@@ -16,15 +16,11 @@ body {
 .register-container {
     color: rgba(243, 244, 246, 1);
     padding: 40px;
-    border: 1px solid #444c56;
-    border-radius: 5px;
-    box-shadow: 0 4px 20px rgba(18, 12, 26, 0.3);
-  
+    box-shadow: 0 4px 20px rgba(18, 12, 26, 0.3); 
     text-align: center;
     width: 100%;
     max-width: 400px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-   
 }
 
 .register-container:hover {

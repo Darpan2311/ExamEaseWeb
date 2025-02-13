@@ -10,6 +10,9 @@ import ExamInterface from './components/Exam-interface';
 import TestBuilder from './components/TestBuilder';
 import ExamResults from './components/ExamResukt';
 
+import StudentHome from './components/Studentdashboard';
+import  Home  from './components/Home';
+
 function App() {
   
 
@@ -18,13 +21,14 @@ function App() {
     <Router>
     <Routes>
       <Route path="/login" element={<LoginPage />} />
-
       <Route path="/register" element={<RegisterPage/>} />
       <Route path='/api/auth/callback' element={<GoogleAuthCallback/>}/>
       <Route path="/api/auth/login/callback" element={<GoogleLoginCallback/>}/>
       <Route path="/exam" element={<ExamInterface/>}/>
       <Route path="/exam/create" element={<TestBuilder/>}/>
       <Route path="/exam/result" element={<ExamResults/>}/>
+      <Route path='/student' element={<StudentHome/>}/>
+      <Route path='/' element={<Home/>}/>
     </Routes>
   </Router>
       
