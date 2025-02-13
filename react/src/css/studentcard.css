@@ -1,0 +1,71 @@
+/* Subject Card Styling */
+.subject-card {
+  background-color: #241f335d;  /* Set a solid background for visibility */
+  border-radius: 8px;
+  box-shadow: 5px 4px 6px rgba(0, 0, 0, 0.511);
+  border: 2px solid #41859ea3;
+  padding: 16px;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.subject-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Card Header */
+.subject-card-header {
+  padding-bottom: 12px;
+}
+
+.subject-card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Card Content */
+.subject-card-content {
+  padding: 8px 0;
+}
+
+.subject-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.info-text {
+  font-size: 0.875rem;
+  color: #4b5563;
+}
+
+/* Card Footer */
+.subject-card-footer {
+  padding-top: 12px;
+}
+
+/* Exam Tags */
+.exam-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.exam-tag {
+  background-color: #e5e7eb;
+  border-radius: 9999px;
+  padding: 4px 12px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #4b5563;
+}
+

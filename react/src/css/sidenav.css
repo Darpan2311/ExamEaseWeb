@@ -1,0 +1,119 @@
+/* Sidebar Styling */
+.sidebar1{
+    width: 350px;
+    height: 100vh;
+    background-color: #0a0d14;
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+  
+    left: 0;
+    top: 0;
+  }
+  
+  /* Sidebar Header */
+  .sidebar-header {
+    display: grid;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .sidebar-logo {
+    font-size: 24px;
+  }
+  
+  .sidebar-title {
+    font-size: 22px;
+    font-weight: bold;
+  }
+  
+  /* Search Bar */
+  .sidebar-search {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 8px;
+    margin-bottom: 20px;
+  }
+  
+  .sidebar-search input {
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    color: white;
+    outline: none;
+    font-size: 16px;
+  }
+  
+  /* Sidebar Navigation */
+  .sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+  
+  .sidebar-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    border-radius: 8px;
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 18px;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .sidebar-nav-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .sidebar-nav-item.active {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  /* Sidebar Footer */
+  .sidebar-footer {
+    margin-top: auto;
+    padding-top: 20px;
+  }
+  
+  .sidebar-footer-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    border-radius: 8px;
+    background-color: transparent;
+    border: none;
+    color: white;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .sidebar-footer-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  /* Responsive Sidebar */
+  @media (max-width: 768px) {
+    .sidebar {
+      width: 200px;
+    }
+  
+    .sidebar-title {
+      font-size: 18px;
+    }
+  
+    .sidebar-nav-item {
+      font-size: 16px;
+      padding: 10px;
+    }
+  }
+  

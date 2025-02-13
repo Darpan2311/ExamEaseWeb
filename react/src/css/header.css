@@ -1,0 +1,81 @@
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    background-color: rgba(39, 43, 56, 0.175);
+    color: white;
+    height: 60px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+  
+  .header-left {
+    display: flex;
+    align-items: center;
+  }
+  
+  .header-title {
+    font-size: 1.3rem;
+    font-weight: 100;
+    margin: 0px;
+    padding: 0px;
+    margin-left: 80px;
+  }
+  
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .header-search {
+    position: relative;
+  }
+  
+  .search-input {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    border: none;
+    background-color: #333;
+    color: white;
+    width: 200px;
+  }
+  
+  .search-input::placeholder {
+    color: #888;
+  }
+  
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .header-button {
+    position: relative;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+
+  .user-profile {
+    display: flex;
+    margin-right: 20px;
+    align-items: center;
+    margin-top: 0px;
+  }
+  
+  .profile-image {
+    width: 32px;
+    height: 32px;
+    margin-top: 0px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  
