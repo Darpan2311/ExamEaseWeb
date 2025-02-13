@@ -6,6 +6,53 @@ body {
     color: white;
 }
 
+/* Navbar */
+.navbar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 50px; /* Adjusted for better spacing */
+    background: rgba(10, 8, 23, 0.737);
+}
+
+.logo {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+/* Adjusted Navbar Links */
+.nav-links {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+#loginbtn {
+    margin-right: 20px;
+    border: 1px solid white;
+    cursor: pointer;
+    background-color: #ff6f47;
+    color: white;
+    font-size: 17px;
+    height: 40px;
+    width: 90px;
+    border-radius: 5px;
+}
+
+#loginbtn:hover {
+    background-color: #c94925;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    transition: 0.3s ease-in-out;
+}
+
+/* Hero Section */
 .hero-container {
     width: 100%;
     min-height: 100vh;
@@ -13,69 +60,26 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
-.navbar {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    background: rgba(10, 8, 23, 0.737);
-}
-
-.logo {
-    margin-left: 25px;
-    font-size: 30px;
-    font-weight: bold;
-}
-.nav-links{
-    margin-left: 950px;
-}
-.nav-links a {
-    color: white;
-    text-decoration: none;
-    margin: 0 15px;
-
-}
-
-
-#loginbtn{
-    margin-right: 20px;
-    border: 2px;
-    border-color: aliceblue;
-    cursor: pointer;
-    background-color: #ff6f47;
-    color: white;
-    border: 1px solid white;
-    font-size: 17px;
-    height: 40px;
-    width: 90px;
-}
-#loginbtn:hover{
-    background-color: #c94925;
-    color: #ffffff;
-    border: 2px solid #ffffff;
-    transition: 0.3s ease-in-out;
-}
-
+/* Hero Content */
 .hero-content {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 95%;
-    height: 3000px;
+    width: 90%;
     max-width: 1500px;
     padding: 50px 0;
 }
 
+/* Hero Text */
 .hero-text {
     max-width: 50%;
-    margin-top: -50px;
 }
 
 .hero-text h1 {
-    font-size:60px;
+    font-size: 60px;
     margin-bottom: 20px;
 }
 
@@ -85,80 +89,45 @@ body {
     margin-bottom: 20px;
 }
 
-.buttons button {
-    padding: 10px 20px;
-    margin-right: 10px;
-    border: none;
-    cursor: pointer;
-
+/* Buttons */
+.buttons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
-
-
-.sign-up {
+.sign-up,
+#try-it {
     background-color: #ff6f47;
     color: white;
     height: 40px;
-    width:120px;
+    width: 120px;
     font-size: 17px;
-    border-radius: 40px;
-
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
 }
-.sign-up:hover{
+
+.sign-up:hover,
+#try-it:hover {
     background-color: #c94925;
     color: #ffffff;
     border: 2px solid #ffffff;
     transition: 0.3s ease-in-out;
 }
-#try-it{
-    background-color: #ff6f47;
-    color: white;
-    height: 40px;
-    width:120px;
-    font-size: 17px;
-    margin-top: 10px  ;
-    margin-left: 60px;
-    border-radius: 20px;
-}
-#try-it:hover
-{  background-color: #c94925;
-    color: #ffffff;
-    border: 2px solid #ffffff;
-    transition: 0.3s ease-in-out;
 
-}
-
-.hero-image img {
-    max-width: 30%;  /* Adjust percentage as needed */
-    height: auto;
-    border-radius: 10px;
-    right: 50px;
-    margin-bottom: 600px;
-
-}
-#hero-para{
-    font-size: large;
-    margin-left: 60px;
-
-}
+/* Fixed Hero Image */
 .hero-image {
-    position: absolute; /* Keep it positioned within the container */
-    top: 200px;  /* Adjust vertical position */
-    /* Adjust horizontal position */
-    /* Adjust size if needed */
-    height:1000px;
-    width:2000px;
-    left: 150px;
+    max-width: 40%;
+    position: absolute;
+    top: 120px;
+    right: 50px;
 }
 
 .hero-image img {
-    width: 100%;  /* Ensure it fits in the container */
+    width: 100%;
     height: auto;
     border-radius: 10px;
-}
-
-.classmarkersteps{
-    margin-top: 500px;
 }
 
 /* Steps Section */
@@ -200,17 +169,13 @@ body {
 
 /* Individual Step Card */
 .step-card {
-    /* background: linear-gradient(135deg, #ff7043, #ff5252); */
     border: 0.5px solid white;
     box-shadow: 0 4px 20px rgba(18, 12, 26, 0.3);
-
-
     color: white;
     padding: 25px;
     border-radius: 15px;
     width: 260px;
     text-align: center;
-
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -219,6 +184,7 @@ body {
     box-shadow: 0 15px 25px rgba(0, 0, 0, 0.25);
 }
 
+/* Step Icon */
 .step-icon {
     font-size: 40px;
     margin-bottom: 15px;
@@ -226,30 +192,30 @@ body {
     justify-content: center;
     background-color: #c94925;
     border: 1px solid rgb(201, 105, 27);
-    width: 20%;
-    padding: 8px;
-    border-radius: 150px;
-    margin-left: 90px;
-}
-
-
-/* Step Title */
-.step-title {
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 12px;
-}
-
-/* Step Points */
-.step-points {
-    list-style: none;
-    padding: 0;
-    font-size: 14px;
-    line-height: 1.6;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    align-items: center;
+    margin: auto;
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
+    .hero-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-text {
+        max-width: 100%;
+    }
+
+    .hero-image {
+        position: static;
+        max-width: 70%;
+        margin-top: 20px;
+    }
+
     .steps-grid {
         flex-direction: column;
         align-items: center;
