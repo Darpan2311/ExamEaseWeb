@@ -18,11 +18,11 @@ const RegisterPage = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (formData.password !== formData.confirmPassword) {
-            alert("Passwords do not match");
-            return;
-        }
-
+        // if (formData.password !== formData.confirmPassword) {
+        //     alert("Passwords do not match");
+        //     return;
+        // }
+            
         try {
             const response = await axios.post('http://localhost:8080/api/auth/register', {
                 email: formData.email,
