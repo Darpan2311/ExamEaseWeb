@@ -3,6 +3,11 @@ import "../css/TestBuilder.css";
 import axiosInstance from "../axiosConfig";
 
 export default function TestBuilder() {
+  const [examName, setExamName] = useState("");
+  const [subjects, setSubjects] = useState([]);
+  const [difficulty, setDifficulty] = useState("Beginner");
+  const [competitiveExams, setCompetitiveExams] = useState([]);
+  
   const [questions, setQuestions] = useState([
     {
       id: 1,
@@ -81,21 +86,25 @@ export default function TestBuilder() {
     );
   };
 
-  
   const publishExam = async () => {
     const formattedQuestions = questions.map((q) => ({
       text: q.text,
       options: q.options.map((o) => ({
         text: o.text,
-        correct: o.id === q.correctAnswer, // Ensure correct option is set
-      }))
+        correct: o.id === q.correctAnswer,
+      })),
     }));
-  
-    const examData = { questions: formattedQuestions };
-  
-    // Debugging - log the exam data before sending it
+
+    const examData = {
+      name: examName, // Change examName -> name
+      difficultyLevel: difficulty, // Change difficulty -> difficultyLevel
+      subjects,
+      questions: formattedQuestions,
+    };
+    
+
     console.log("🚀 Exam data being sent to backend:", JSON.stringify(examData, null, 2));
-  
+
     try {
       const response = await axiosInstance.post("/api/exams", examData);
       if (response.status === 200) {
@@ -108,10 +117,7 @@ export default function TestBuilder() {
       alert("Error publishing exam.");
     }
   };
-  
-  
-  
-  
+
   return (
     <div className="test-builder">
       <aside className="sidebar1">
@@ -139,68 +145,75 @@ export default function TestBuilder() {
             <p>Build and publish your tests in no time.</p>
           </header>
           <div className="question-meta">
-            {["Topics Covered", "Grade", "Textbook", "Difficulty"].map((label) => (
-              <div key={label} className="question-meta-item">
-                <select>
-                  <option>
-                    {label === "Question Type"
-                      ? "Multiple choice"
-                      : label === "Topics Covered"
-                      ? "Algebra - Geometry"
-                      : label === "Grade"
-                      ? "9th Grade"
-                      : label === "Textbook"
-                      ? "Mathematics"
-                      : "Medium"}
-                  </option>
-                </select>
-              </div>
-            ))}
+            <label>
+              Exam Name:
+              <input
+                type="text"
+                value={examName}
+                onChange={(e) => setExamName(e.target.value)}
+                placeholder="Enter exam name"
+              />
+            </label>
+            <label>
+              Subjects:
+              <input
+                type="text"
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && e.target.value.trim() !== "") {
+                    setSubjects([...subjects, e.target.value.trim()]);
+                    e.target.value = "";
+                  }
+                }}
+                placeholder="Enter a subject and press Enter"
+              />
+            </label>
+            <ul>
+              {subjects.map((subject, index) => (
+                <li key={index}>{subject}</li>
+              ))}
+            </ul>
+            <label>
+              Difficulty Level:
+              <select value={difficulty} onChange={(e) => setDifficulty(e.target.value)}>
+                <option value="Beginner">Beginner</option>
+                <option value="Intermediate">Intermediate</option>
+                <option value="Master">Master</option>
+              </select>
+            </label>
           </div>
           <div className="questions-list">
             {questions.map((question, index) => (
               <div key={question.id} className="question-item">
                 <div className="question-header">
                   <h3>Question {index + 1}</h3>
-                  <button onClick={() => removeQuestion(question.id)} className="remove-question">
-                    Remove Question
-                  </button>
+                  <button onClick={() => removeQuestion(question.id)} className="remove-question">Remove Question</button>
                 </div>
-                <div className="question-content">
-                  <textarea
-                    value={question.text}
-                    onChange={(e) => updateQuestionText(question.id, e.target.value)}
-                    placeholder="Enter your question here..."
-                    className="question-text"
-                  />
-                  {question.options.map((option, optionIndex) => (
-                    <div key={option.id} className="option-item">
-                      <div className="option-header">
-                        <input
-                          type="radio"
-                          name={`correct-answer-${question.id}`}
-                          onChange={() => selectCorrectAnswer(question.id, option.id)}
-                          checked={question.correctAnswer === option.id}
-                        />
-                        <h4>Choice {optionIndex + 1}</h4>
-                      </div>
-                      <textarea
-                        value={option.text}
-                        onChange={(e) => updateOptionText(question.id, option.id, e.target.value)}
-                        placeholder="Enter option text..."
-                        className="option-text"
-                      />
-                    </div>
-                  ))}
-                </div>
+                <textarea
+                  value={question.text}
+                  onChange={(e) => updateQuestionText(question.id, e.target.value)}
+                  placeholder="Enter your question here..."
+                  className="question-text"
+                />
+                {question.options.map((option, optionIndex) => (
+                  <div key={option.id} className="option-item">
+                    <input
+                      type="radio"
+                      name={`correct-answer-${question.id}`}
+                      onChange={() => selectCorrectAnswer(question.id, option.id)}
+                      checked={question.correctAnswer === option.id}
+                    />
+                    <textarea
+                      value={option.text}
+                      onChange={(e) => updateOptionText(question.id, option.id, e.target.value)}
+                      placeholder="Enter option text..."
+                      className="option-text"
+                    />
+                  </div>
+                ))}
               </div>
             ))}
-            <button onClick={addQuestion} className="add-question" disabled={!canAddQuestion}>
-              Add New Question
-            </button>
-            <button onClick={publishExam} className="publish-exam">
-              Publish Exam
-            </button>
+            <button onClick={addQuestion} className="add-question" disabled={!canAddQuestion}>Add New Question</button>
+            <button onClick={publishExam} className="publish-exam">Publish Exam</button>
           </div>
         </div>
       </main>
