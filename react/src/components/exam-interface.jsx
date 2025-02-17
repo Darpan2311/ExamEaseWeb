@@ -1,98 +1,105 @@
-import { useState, useEffect } from "react"
-import "../css/ExamInterface.css"
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom"; // ✅ Get examId from URL
+import axiosInstance from "../axiosConfig"; // ✅ Import axios instance
+import "../css/ExamInterface.css";
 
 const ExamInterface = () => {
-  const [timeLeft, setTimeLeft] = useState(10784) // 2:59:44 in seconds
-  const [currentQuestion, setCurrentQuestion] = useState(1)
-  const [answers, setAnswers] = useState([])
-  const [markedQuestions, setMarkedQuestions] = useState([])
-  const [visitedQuestions, setVisitedQuestions] = useState([])
-  const totalQuestions = 35
+  const { examId } = useParams(); // ✅ Get examId from URL
+  const [timeLeft, setTimeLeft] = useState(10784); // 2:59:44 in seconds
+  const [questions, setQuestions] = useState([]); // ✅ Store fetched questions
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0); // ✅ Track current question index
+  const [answers, setAnswers] = useState([]);
+  const [markedQuestions, setMarkedQuestions] = useState([]); // Questions marked by the user
+  const [visitedQuestions, setVisitedQuestions] = useState([]); // Questions the user has visited
 
-  // Timer logic
+  // ✅ Fetch Questions Dynamically
+  useEffect(() => {
+    const fetchQuestions = async () => {
+      try {
+        const response = await axiosInstance.get(`/api/exams/${examId}/questions`);
+        console.log("Fetched Questions:", response.data);
+        setQuestions(response.data);
+      } catch (error) {
+        console.error("Error fetching questions:", error.response?.data || error.message);
+      }
+    };
+
+    fetchQuestions();
+  }, [examId]);
+
+  // ✅ Timer Logic
   useEffect(() => {
     const timer = setInterval(() => {
-      setTimeLeft((prev) => (prev > 0 ? prev - 1 : 0))
-    }, 1000)
-    return () => clearInterval(timer)
-  }, [])
+      setTimeLeft((prev) => (prev > 0 ? prev - 1 : 0));
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
 
   const formatTime = (seconds) => {
-    const hrs = Math.floor(seconds / 3600)
-    const mins = Math.floor((seconds % 3600) / 60)
-    const secs = seconds % 60
-    return `${String(hrs).padStart(2, "0")}:${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`
-  }
+    const hrs = Math.floor(seconds / 3600);
+    const mins = Math.floor((seconds % 3600) / 60);
+    const secs = seconds % 60;
+    return `${String(hrs).padStart(2, "0")}:${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+  };
 
-  // Navigation handlers
+  // ✅ Navigation Handlers
   const goToNextQuestion = () => {
-    if (currentQuestion < totalQuestions) {
-      setCurrentQuestion(currentQuestion + 1)
-      setVisitedQuestions((prev) => [...new Set([...prev, currentQuestion + 1])])
+    if (currentQuestionIndex < questions.length - 1) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+      setVisitedQuestions((prev) => [...new Set([...prev, currentQuestionIndex + 1])]);
     }
-  }
+  };
 
   const goToPreviousQuestion = () => {
-    if (currentQuestion > 1) {
-      setCurrentQuestion(currentQuestion - 1)
+    if (currentQuestionIndex > 0) {
+      setCurrentQuestionIndex(currentQuestionIndex - 1);
     }
-  }
+  };
 
-  // Answer handlers
+  // ✅ Answer Selection
   const handleAnswerSelect = (selectedOption) => {
     setAnswers((prev) => {
-      const existingAnswerIndex = prev.findIndex((a) => a.questionId === currentQuestion)
+      const existingAnswerIndex = prev.findIndex((a) => a.questionId === currentQuestionIndex);
       if (existingAnswerIndex !== -1) {
-        const newAnswers = [...prev]
-        newAnswers[existingAnswerIndex] = { questionId: currentQuestion, selectedOption }
-        return newAnswers
+        const newAnswers = [...prev];
+        newAnswers[existingAnswerIndex] = { questionId: currentQuestionIndex, selectedOption: selectedOption.id };  // Use option.id
+        return newAnswers;
       }
-      return [...prev, { questionId: currentQuestion, selectedOption }]
-    })
-  }
+      return [...prev, { questionId: currentQuestionIndex, selectedOption: selectedOption.id }];  // Store id
+    });
+  };
 
-  // Mark question handler
+  // ✅ Marking Questions
   const toggleMarkQuestion = () => {
     setMarkedQuestions((prev) => {
-      if (prev.includes(currentQuestion)) {
-        return prev.filter((q) => q !== currentQuestion)
+      if (prev.includes(currentQuestionIndex)) {
+        return prev.filter((q) => q !== currentQuestionIndex);
       }
-      return [...prev, currentQuestion]
-    })
-  }
+      return [...prev, currentQuestionIndex];
+    });
+  };
 
-  // Save and next handler
-  const handleSaveAndNext = () => {
-    goToNextQuestion()
-  }
+  // ✅ Get Question Status
+  const getQuestionStatus = (index) => {
+    if (currentQuestionIndex === index) return "current";
+    if (answers.some((a) => a.questionId === index)) return "answered";
+    if (markedQuestions.includes(index)) return "marked";
+    if (visitedQuestions.includes(index) && !answers.some((a) => a.questionId === index)) return "visited";
+    return "";
+  };
 
-  // Get question status
-  const getQuestionStatus = (questionNumber) => {
-    if (currentQuestion === questionNumber) return "current"
-    if (answers.some((a) => a.questionId === questionNumber)) return "answered"
-    if (markedQuestions.includes(questionNumber)) return "marked"
-    if (visitedQuestions.includes(questionNumber) && !answers.some((a) => a.questionId === questionNumber))
-      return "visited"
-    return ""
-  }
-
-  // Get current answer
+  // ✅ Get Current Answer
   const getCurrentAnswer = () => {
-    return answers.find((a) => a.questionId === currentQuestion)?.selectedOption || ""
-  }
+    return answers.find((a) => a.questionId === currentQuestionIndex)?.selectedOption || "";
+  };
 
-  // Statistics
-  const answeredCount = answers.length
-  const markedCount = markedQuestions.length
-  const unansweredCount = totalQuestions - answeredCount
-  const visitedUnansweredCount = visitedQuestions.length - answeredCount
+  // ✅ Get Current Question
+  const currentQuestion = questions[currentQuestionIndex] || {};
 
   return (
     <div className="exam-interface">
       {/* Header */}
       <header className="header">
-    
-    
         <div className="header-right">
           <div className="timer">{formatTime(timeLeft)}</div>
           <button className="end-test-btn">End test</button>
@@ -103,97 +110,75 @@ const ExamInterface = () => {
         <div className="main-content">
           {/* Main content */}
           <div className="question-section">
-            <div className="question-card">
-              <div className="question-header">
-                <div>
-                  <h2 className="question-title">Question {currentQuestion}</h2>
+            {questions.length > 0 ? (
+              <div className="question-card">
+                <div className="question-header">
+                  <h2 className="question-title">Question {currentQuestionIndex + 1}</h2>
                   <p className="question-marks">+4 marks, -1 mark</p>
                 </div>
-                
-              </div>
 
-              <div className="question-content">
-                <p>
-                In a B+ tree, the requirement of at least half-full (50%) node occupancy is relaxed for which one of the following cases?
-
-                </p>
-                
-                <div className="answer-options">
-                  {["Only the root node", "All leaf nodes", "All internal nodes", "Only the leftmost leaf node"].map((option) => (
-                    <label key={option} className="answer-option">
-                      <input
-                        type="radio"
-                        name="answer"
-                        checked={getCurrentAnswer() === option}
-                        onChange={() => handleAnswerSelect(option)}
-                      />
-                      <span>{option}</span>
-                    </label>
-                  ))}
+                <div className="question-content">
+                  <p>{currentQuestion.text}</p> {/* ✅ Dynamic Question Text */}
+                  <div className="answer-options">
+                    {currentQuestion.options?.map((option, index) => (
+                      <label
+                        key={index}
+                        className={`answer-option ${getCurrentAnswer() === option.id ? 'selected' : ''} ${option.id === currentQuestion.correctOption?.id ? 'correct' : ''}`}
+                      >
+                        <input
+                          type="radio"
+                          name="answer"
+                          checked={getCurrentAnswer() === option.id}
+                          onChange={() => handleAnswerSelect(option)}
+                        />
+                        <span>{option.text}</span> {/* Display the text of the option */}
+                      </label>
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
+            ) : (
+              <p>Loading questions...</p>
+            )}
 
             <div className="navigation-buttons">
-              <button className="nav-btn" onClick={goToPreviousQuestion} disabled={currentQuestion === 1}>
+              <button className="nav-btn" onClick={goToPreviousQuestion} disabled={currentQuestionIndex === 0}>
                 Previous
               </button>
-              <div className="right-buttons">
-                <button
-                  className={`mark-btn ${markedQuestions.includes(currentQuestion) ? "marked" : ""}`}
-                  onClick={toggleMarkQuestion}
-                >
+              <button className={`mark-btn ${markedQuestions.includes(currentQuestionIndex) ? "marked" : ""}`} onClick={toggleMarkQuestion}>
                 Mark
-                </button>
-                <button className="save-next-btn" onClick={handleSaveAndNext}>
-                  Save & Next
-                </button>
-              </div>
+              </button>
+              <button className="save-next-btn" onClick={goToNextQuestion} disabled={currentQuestionIndex >= questions.length - 1}>
+                Save & Next
+              </button>
             </div>
           </div>
 
-          
+          {/* Sidebar */}
           <div className="sidebar">
             <div className="sidebar-card">
-              <h3 className="sidebar-title">Gate 2023 DSA Section</h3>
-              <div className="question-stats">
-                <div className="stat-item">
-                  <div className="stat-dot answered" />
-                  <span>{answeredCount} answered</span>
-                </div>
-                <div className="stat-item">
-                  <div className="stat-dot marked" />
-                  <span>{markedCount} marked</span>
-                </div>
-                <div className="stat-item">
-                  <div className="stat-dot visited" />
-                  <span>{visitedUnansweredCount} visited</span>
-                </div>
-                <div className="stat-item">
-                  <div className="stat-dot unanswered" />
-                  <span>{unansweredCount} unanswered</span>
-                </div>
-              </div>
+              <h3 className="sidebar-title">Exam Questions</h3>
               <div className="question-grid">
-                {Array.from({ length: totalQuestions }, (_, i) => (
+                {questions.map((_, index) => (
                   <button
-                    key={i + 1}
-                    className={`question-btn ${getQuestionStatus(i + 1)}`}
+                    key={index}
+                    className={`question-btn ${getQuestionStatus(index)}`}
                     onClick={() => {
-                      setCurrentQuestion(i + 1)
-                      setVisitedQuestions((prev) => [...new Set([...prev, i + 1])])
+                      setCurrentQuestionIndex(index);
+                      setVisitedQuestions((prev) => [...new Set([...prev, index])]);
                     }}
                   >
-                    {i + 1}
+                    {index + 1}
                   </button>
                 ))}
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ExamInterface
+export default ExamInterface;

@@ -47,6 +47,7 @@ export default function StudentHome() {
                   <ExamCard
                     key={index}
                     name={exam.name}
+                    id={exam.id} 
                     author={exam.author}
                     subjects={exam.subjects || []}
                     difficulty={exam.difficultyLevel}

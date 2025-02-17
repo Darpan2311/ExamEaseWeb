@@ -49,6 +49,19 @@ public class ExamService {
     public List<Exam> getAllExams() {
         return examRepository.findAll();
     }
+    public Exam getExamById(Long examId) {
+        return examRepository.findById(examId).orElseThrow(() -> new RuntimeException("Exam not found"));
+    }
+
+
+    public List<Question> getQuestionsByExamId(Long examId) {
+        List<Question> questions = questionRepository.findByExamId(examId);
+        questions.forEach(question -> {
+            // Optionally, clean up any unnecessary fields or modify the structure as needed.
+            question.setExam(null); // Remove the exam object from each question to avoid repetition
+        });
+        return questions;
+    }
 
 }
 

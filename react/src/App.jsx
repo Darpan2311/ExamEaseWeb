@@ -24,7 +24,7 @@ function App() {
       <Route path="/register" element={<RegisterPage/>} />
       <Route path='/api/auth/callback' element={<GoogleAuthCallback/>}/>
       <Route path="/api/auth/login/callback" element={<GoogleLoginCallback/>}/>
-      <Route path="/exam" element={<ExamInterface/>}/>
+      <Route path="/exam/:examId" element={<ExamInterface />} />
       <Route path="/exam/create" element={<TestBuilder/>}/>
       <Route path="/exam/result" element={<ExamResults/>}/>
       <Route path='/student' element={<StudentHome/>}/>

@@ -1,6 +1,7 @@
 package com.examease.sdp.controller;
 
 import com.examease.sdp.model.Exam;
+import com.examease.sdp.model.Question;
 import com.examease.sdp.service.ExamService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,6 +29,14 @@ public class ExamController {
         }
 
         return examService.saveExam(exam);
+    }
+    @GetMapping("/{id}")
+    public Exam getExamById(@PathVariable Long id) {
+        return examService.getExamById(id);
+    }
+    @GetMapping("/{examId}/questions")
+    public List<Question> getQuestions(@PathVariable Long examId) {
+        return examService.getQuestionsByExamId(examId);
     }
 
     @GetMapping("/get")
