@@ -1,15 +1,12 @@
 /* General Styles */
 body {
     margin: 0;
-    font-family: 'Arial', sans-serif;
-    
-    
+    padding: 0;
+    justify-items: center;
+    width: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 10px;  
-    box-sizing: border-box;
+    justify-content:space-between ;
+    height: 100%;
 }
 
 

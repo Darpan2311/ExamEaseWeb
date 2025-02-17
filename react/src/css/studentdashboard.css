@@ -1,9 +1,10 @@
-body {
+.body {
   margin: 0;
   padding: 0;
-  display: flexbox;
+  align-items: flex-start;
   width: 100%;
-
+  display: flex;
+  justify-content:space-between ;
   height: 100%;
   background-color: #121212;
 }

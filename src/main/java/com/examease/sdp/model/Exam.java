@@ -1,30 +1,46 @@
 package com.examease.sdp.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")  // ✅ Prevent circular references
 public class Exam {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    private String name;
+    private String difficultyLevel;
+    private String author;
     @OneToMany(mappedBy = "exam", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Question> questions;
 
-    public Long getId() {
-        return id;
-    }
+    @ElementCollection
+    private List<String> subjects;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public List<Question> getQuestions() {
-        return questions;
-    }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 
-    public void setQuestions(List<Question> questions) {
-        this.questions = questions;
-    }
+    public String getDifficultyLevel() { return difficultyLevel; }
+    public void setDifficultyLevel(String difficultyLevel) { this.difficultyLevel = difficultyLevel; }
+
+    public List<Question> getQuestions() { return questions; }
+    public void setQuestions(List<Question> questions) { this.questions = questions; }
+
+    public List<String> getSubjects() { return subjects; }
+    public void setSubjects(List<String> subjects) { this.subjects = subjects; }
 }

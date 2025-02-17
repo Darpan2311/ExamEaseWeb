@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../css/TestBuilder.css";
 import axiosInstance from "../axiosConfig";
+import UserName from "./UserDetails";
 
 export default function TestBuilder() {
   const [examName, setExamName] = useState("");
@@ -106,7 +107,7 @@ export default function TestBuilder() {
     console.log("🚀 Exam data being sent to backend:", JSON.stringify(examData, null, 2));
 
     try {
-      const response = await axiosInstance.post("/api/exams", examData);
+      const response = await axiosInstance.post("/api/exams/create", examData);
       if (response.status === 200) {
         alert("Exam published successfully!");
       } else {
@@ -141,7 +142,7 @@ export default function TestBuilder() {
       <main className="main-content">
         <div className="container">
           <header className="main-header">
-            <h1>Welcome back user</h1>
+            <h1>Welcome back <UserName/></h1>
             <p>Build and publish your tests in no time.</p>
           </header>
           <div className="question-meta">

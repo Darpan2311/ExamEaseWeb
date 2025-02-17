@@ -1,24 +1,18 @@
 package com.examease.sdp.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")  // ✅ Prevent circular references
 public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String text;
-
-
-    public Option getCorrectOption() {
-        return correctOption;
-    }
-
-    public void setCorrectOption(Option correctOption) {
-        this.correctOption = correctOption;
-    }
 
     @ManyToOne
     @JoinColumn(name = "exam_id", nullable = false)
@@ -31,37 +25,18 @@ public class Question {
     @JoinColumn(name = "correct_option_id")
     private Option correctOption;
 
-    public Long getId() {
-        return id;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public String getText() { return text; }
+    public void setText(String text) { this.text = text; }
 
-    public String getText() {
-        return text;
-    }
+    public Exam getExam() { return exam; }
+    public void setExam(Exam exam) { this.exam = exam; }
 
-    public void setText(String text) {
-        this.text = text;
-    }
+    public List<Option> getOptions() { return options; }
+    public void setOptions(List<Option> options) { this.options = options; }
 
-
-
-    public Exam getExam() {
-        return exam;
-    }
-
-    public void setExam(Exam exam) {
-        this.exam = exam;
-    }
-
-    public List<Option> getOptions() {
-        return options;
-    }
-
-    public void setOptions(List<Option> options) {
-        this.options = options;
-    }
+    public Option getCorrectOption() { return correctOption; }
+    public void setCorrectOption(Option correctOption) { this.correctOption = correctOption; }
 }
