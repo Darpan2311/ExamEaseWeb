@@ -22,20 +22,48 @@ public class Submission {
     private List<StudentAnswer> answers;
 
     private LocalDateTime submittedAt;
+    private Double totalTimeSpent; // Store total exam time
 
-    // Getters and Setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Double getTotalTimeSpent() { return totalTimeSpent; }
+    public void setTotalTimeSpent(Double totalTimeSpent) { this.totalTimeSpent = totalTimeSpent; }
 
-    public MyUser getStudent() { return student; }
-    public void setStudent(MyUser student) { this.student = student; }
+    public Long getId() {
+        return id;
+    }
 
-    public Exam getExam() { return exam; }
-    public void setExam(Exam exam) { this.exam = exam; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public List<StudentAnswer> getAnswers() { return answers; }
-    public void setAnswers(List<StudentAnswer> answers) { this.answers = answers; }
+    public MyUser getStudent() {
+        return student;
+    }
 
-    public LocalDateTime getSubmittedAt() { return submittedAt; }
-    public void setSubmittedAt(LocalDateTime submittedAt) { this.submittedAt = submittedAt; }
+    public void setStudent(MyUser student) {
+        this.student = student;
+    }
+
+    public Exam getExam() {
+        return exam;
+    }
+
+    public void setExam(Exam exam) {
+        this.exam = exam;
+    }
+
+    public List<StudentAnswer> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(List<StudentAnswer> answers) {
+        this.answers = answers;
+    }
+
+    public LocalDateTime getSubmittedAt() {
+        return submittedAt;
+    }
+
+    public void setSubmittedAt(LocalDateTime submittedAt) {
+        this.submittedAt = submittedAt;
+    }
 }

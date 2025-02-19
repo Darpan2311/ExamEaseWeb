@@ -31,7 +31,7 @@ public class SubmissionService {
 
 
     @Transactional
-    public Submission submitExam(String email, Long examId, List<StudentAnswerRequest> answers) {
+    public Submission submitExam(String email, Long examId, List<StudentAnswerRequest> answers, Double totalTimeSpent) {
         MyUser student = userRepo.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("Student not found"));
         Exam exam = examRepo.findById(examId)
@@ -41,6 +41,8 @@ public class SubmissionService {
         submission.setStudent(student);
         submission.setExam(exam);
         submission.setSubmittedAt(LocalDateTime.now());
+        submission.setTotalTimeSpent(totalTimeSpent);
+
         Submission savedSubmission = submissionRepo.save(submission);
 
         for (StudentAnswerRequest answerRequest : answers) {
@@ -54,11 +56,13 @@ public class SubmissionService {
             studentAnswer.setSubmission(savedSubmission);
             studentAnswer.setQuestion(question);
             studentAnswer.setSelectedOption(selectedOption);
+            studentAnswer.setTimeSpent(answerRequest.getTimeSpent());
 
             studentAnswerRepo.save(studentAnswer);
         }
 
         return savedSubmission;
     }
+
 
 }

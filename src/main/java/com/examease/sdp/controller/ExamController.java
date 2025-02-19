@@ -59,7 +59,9 @@ public class ExamController {
             @PathVariable Long examId,
             @RequestBody ExamSubmissionRequest request) {
 
-        Submission submission = submissionService.submitExam(userDetails.getUsername(), examId, request.getAnswers());
+        Submission submission = submissionService.submitExam(
+                userDetails.getUsername(), examId, request.getAnswers(), request.getTotalTimeSpent());
+
         return ResponseEntity.ok(submission);
     }
 
