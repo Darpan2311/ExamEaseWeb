@@ -53,7 +53,6 @@ public class ExamService {
         return examRepository.findById(examId).orElseThrow(() -> new RuntimeException("Exam not found"));
     }
 
-
     public List<Question> getQuestionsByExamId(Long examId) {
         List<Question> questions = questionRepository.findByExamId(examId);
         questions.forEach(question -> {
@@ -62,7 +61,6 @@ public class ExamService {
         });
         return questions;
     }
-
 }
 
    
