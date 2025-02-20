@@ -47,6 +47,8 @@ const RegisterPage = () => {
     };
 
     return (
+
+    <div className='register'>
         <div className="register-container">
     <h1>Create Account</h1>
     <form onSubmit={handleSubmit}>
@@ -91,7 +93,7 @@ const RegisterPage = () => {
         <button type="button" className='social-login' onClick={handleGoogleSignIn}>Google</button>
     </form>
 </div>
-
+</div>
     );
 };
 

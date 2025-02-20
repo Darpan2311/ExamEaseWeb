@@ -60,6 +60,7 @@ const LoginPage = () => {
     
 
     return (
+        <div className='login'>
         <div className="login-container">
             <h1>Log In</h1>
             <form id="login-form" onSubmit={handleSubmit}>
@@ -105,6 +106,7 @@ const LoginPage = () => {
                 </div>
                 <p className="create-account">New to ExamEase? <a href="/register">Create an account</a></p>
             </form>
+        </div>
         </div>
     );
 };

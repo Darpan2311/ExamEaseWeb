@@ -1,13 +1,12 @@
-body {
-  margin: 0;
-  padding: 0;
+.student {
+  
   align-items: flex-start;
 
-  width: 100%;
+  width: 100vw;
   display: flex;
   justify-content:space-between ;
-  height: 100%;
-  background-color: #121212;
+  height: 100vh;
+  
 }
 
 .home-container {

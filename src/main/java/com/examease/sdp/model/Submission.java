@@ -22,7 +22,36 @@ public class Submission {
     private List<StudentAnswer> answers;
 
     private LocalDateTime submittedAt;
-    private Double totalTimeSpent; // Store total exam time
+    private Double totalTimeSpent;
+    private int totalScore;
+    private int correctAnswers;
+    private int incorrectAnswers;
+
+    // Getters and Setters
+
+    public int getTotalScore() {
+        return totalScore;
+    }
+
+    public void setTotalScore(int totalScore) {
+        this.totalScore = totalScore;
+    }
+
+    public int getCorrectAnswers() {
+        return correctAnswers;
+    }
+
+    public void setCorrectAnswers(int correctAnswers) {
+        this.correctAnswers = correctAnswers;
+    }
+
+    public int getIncorrectAnswers() {
+        return incorrectAnswers;
+    }
+
+    public void setIncorrectAnswers(int incorrectAnswers) {
+        this.incorrectAnswers = incorrectAnswers;
+    }
 
     public Double getTotalTimeSpent() { return totalTimeSpent; }
     public void setTotalTimeSpent(Double totalTimeSpent) { this.totalTimeSpent = totalTimeSpent; }

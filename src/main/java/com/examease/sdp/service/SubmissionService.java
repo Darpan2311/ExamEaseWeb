@@ -28,8 +28,6 @@ public class SubmissionService {
     @Autowired
     private OptionRepo optionRepo;
 
-
-
     @Transactional
     public Submission submitExam(String email, Long examId, List<StudentAnswerRequest> answers, Double totalTimeSpent) {
         MyUser student = userRepo.findByEmail(email)
@@ -45,6 +43,10 @@ public class SubmissionService {
 
         Submission savedSubmission = submissionRepo.save(submission);
 
+        int correctAnswers = 0;
+        int incorrectAnswers = 0;
+        int totalScore = 0;
+
         for (StudentAnswerRequest answerRequest : answers) {
             Question question = questionRepo.findById(answerRequest.getQuestionId())
                     .orElseThrow(() -> new RuntimeException("Question not found"));
@@ -59,10 +61,24 @@ public class SubmissionService {
             studentAnswer.setTimeSpent(answerRequest.getTimeSpent());
 
             studentAnswerRepo.save(studentAnswer);
+
+            if (selectedOption.isCorrect()) {
+                correctAnswers++;
+                totalScore += 4;
+            } else {
+                incorrectAnswers++;
+                totalScore -= 1;
+            }
         }
 
-        return savedSubmission;
+        savedSubmission.setCorrectAnswers(correctAnswers);
+        savedSubmission.setIncorrectAnswers(incorrectAnswers);
+        savedSubmission.setTotalScore(totalScore);
+        return submissionRepo.save(savedSubmission);
     }
 
-
+    public Submission getSubmissionById(Long submissionId) {
+        return submissionRepo.findById(submissionId)
+                .orElseThrow(() -> new RuntimeException("Submission not found"));
+    }
 }

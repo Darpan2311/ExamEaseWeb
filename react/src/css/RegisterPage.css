@@ -1,15 +1,11 @@
-/* General Styles */
-body {
-    margin: 0;
-    font-family: 'Arial', sans-serif;
-    
+.register
+{
     display: flex;
-    justify-content: center;
+    justify-content:center;
     align-items: center;
-    min-height: 100vh;
-    padding: 10px;
-    box-sizing: border-box;
-    color: rgba(243, 244, 246, 1);
+    width: 100vw;
+    height: 100vh;
+
 }
 
 /* Register Container */
@@ -18,7 +14,7 @@ body {
     padding: 40px;
     box-shadow: 0 4px 20px rgba(18, 12, 26, 0.3); 
     text-align: center;
-    width: 100%;
+    width: 20vw;
     max-width: 400px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }

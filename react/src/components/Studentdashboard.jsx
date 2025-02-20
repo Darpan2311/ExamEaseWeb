@@ -37,10 +37,11 @@ export default function StudentHome() {
         <aside className="home-sidebar">
           <Sidenav />
         </aside>
-        <div className="home-content">
-          {loading && <p>Loading exams...</p>}
-          {error && <p className="error">{error}</p>}
-          {!loading && !error && (
+        <div className="student">
+          <div className="home-content">
+            {loading && <p>Loading exams...</p>}
+            {error && <p className="error">{error}</p>}
+            {!loading && !error && (
             <div className="subject-grid">
               {exams.length > 0 ? (
                 exams.map((exam, index) => (
@@ -58,7 +59,8 @@ export default function StudentHome() {
                 <p>No exams available.</p>
               )}
             </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
     </div>

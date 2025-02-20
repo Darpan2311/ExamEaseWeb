@@ -1,5 +1,6 @@
 package com.examease.sdp.controller;
 
+import com.examease.sdp.DTO.ExamResultResponse;
 import com.examease.sdp.DTO.ExamSubmissionRequest;
 import com.examease.sdp.model.Exam;
 import com.examease.sdp.model.Question;
@@ -64,5 +65,17 @@ public class ExamController {
 
         return ResponseEntity.ok(submission);
     }
+    @GetMapping("/{submissionId}/result")
+    public ResponseEntity<ExamResultResponse> getExamResult(@PathVariable Long submissionId) {
+        Submission submission = submissionService.getSubmissionById(submissionId);
 
+        ExamResultResponse response = new ExamResultResponse(
+                submission.getTotalScore(),
+                submission.getCorrectAnswers(),
+                submission.getIncorrectAnswers(),
+                submission.getTotalTimeSpent()
+        );
+
+        return ResponseEntity.ok(response);
+    }
 }

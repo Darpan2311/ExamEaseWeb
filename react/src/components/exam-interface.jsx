@@ -80,8 +80,8 @@ const ExamInterface = () => {
   
   
   return (
-    <div className="exam-interface">
-      <header className="header">
+    <div id="exam-interface">
+      <header className="aheader">
         <div className="header-right">
           <div className="timer">{new Date(timeLeft * 1000).toISOString().substr(11, 8)}</div>
           <button className="end-test-btn" onClick={submitExam}>End test</button>
@@ -89,7 +89,7 @@ const ExamInterface = () => {
       </header>
 
       <div className="container">
-        <div className="main-content">
+        <div className="amain-content">
           <div className="question-section">
             {questions.length > 0 ? (
               <div className="question-card">
@@ -149,11 +149,10 @@ const ExamInterface = () => {
     }
     disabled={currentQuestionIndex >= questions.length - 1}
   >
-    Save & Next
-  </button>
-</div>
-            
-          </div>
+  Save & Next
+    </button>
+      </div>    
+        </div>
           <div className="sidebar">
             <div className="sidebar-card">
               <h3 className="sidebar-title">Exam Questions</h3>

@@ -1,26 +1,19 @@
-/* Global Styles */
-body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-items:center;
-    background: linear-gradient(to bottom, #000, #181b2c);
-    color: #e2e8f0; /* Light text color for contrast */
+.exam-interface{
+    width: 100dvw;
+    
 }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 1rem;
-}
 
 /* Header Styles */
-.header {
+.aheader {
     display: flex;
-    justify-content: flex-end; /* Adjusted to center the timer and button */
+    justify-content: flex-end;
     align-items: center;
-    padding: 0.5rem 1rem;
-    background-color: #33415500; /* Darker background for header */
-    border-bottom: 1px solid #475569; /* Subtle border for separation */
+    width: 100vw;  /* Ensures it exactly matches the viewport width */
+    padding: 0.5rem 1rem; /* Space inside without increasing width */
+    box-sizing: border-box; /* Ensures padding is included in the width */
+    background-color: #33415500;
+    border-bottom: 1px solid #475569;
 }
 
 .header-right {
@@ -49,12 +42,14 @@ body {
 }
 
 /* Main Content Styles */
-.main-content {
+.amain-content {
     display: flex;
-    
+    margin-right: 0px;
     grid-template-columns: 1fr 300px;
     gap: 1.5rem;
     margin-top: 1.5rem;
+    width: 100vw;
+   
 }
 
 .question-section {
@@ -69,6 +64,9 @@ body {
     border-radius: 0.75rem;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5); /* Stronger shadow for dark theme */
     padding: 1.5rem;
+    width: 53vw;
+
+    margin-right: 10px;
 }
 
 .question-header {
@@ -194,6 +192,7 @@ body {
 .sidebar {
     display: flex;
     flex-direction: column;
+
     gap: 1.5rem;
 }
 
