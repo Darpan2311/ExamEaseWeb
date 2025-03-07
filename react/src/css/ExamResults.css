@@ -3,6 +3,8 @@
 }
 
 .exam-results-container {
+  
+   margin-left: 300px;
     font-family: "Segoe UI", Arial, sans-serif;
     padding: 20px;
     color: #e0e0e0; /* Soft white for main text */

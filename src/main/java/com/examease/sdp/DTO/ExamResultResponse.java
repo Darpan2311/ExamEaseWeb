@@ -45,5 +45,4 @@ public class ExamResultResponse {
         this.totalTimeSpent = totalTimeSpent;
     }
 
-    // Constructor, Getters, and Setters
 }

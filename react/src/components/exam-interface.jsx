@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import axiosInstance from "../axiosConfig";
 import "../css/ExamInterface.css";
 
-const ExamInterface = () => {
+  const ExamInterface = () => {
   const { examId } = useParams();
   const navigate = useNavigate();
   const [timeLeft, setTimeLeft] = useState(10784);

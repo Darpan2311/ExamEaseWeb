@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 @CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/api/auth/google")
-public class GoogleAuthController {
+public class  GoogleAuthController {
 
     @Value("${spring.security.oauth2.client.registration.google.client-id}")
     private String clientId;

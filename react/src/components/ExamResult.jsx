@@ -49,7 +49,7 @@ const ExamResults = () => {
   ]);
 
   return (
-    <div className="exam-results-container">
+    <div className="exam-results-container" id="exam-res-caonteiner">
       <header className="exam-header">
         <h1>Exam Results</h1>
         <div className="exam-info">
@@ -91,9 +91,9 @@ const ExamResults = () => {
       </section>
 
       <section className="publish-options">
-        <p>Exam results aren't published yet.</p>
-        <button className="btn btn-primary">Publish without Feedback</button>
-        <button className="btn btn-secondary">Publish with Feedback</button>
+      
+
+      
       </section>
 
       <section className="student-list">
