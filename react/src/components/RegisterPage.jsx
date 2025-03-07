@@ -101,6 +101,7 @@ const RegisterPage = () => {
                     <span>or</span>
                 </div>
         <button type="button" className='social-login' onClick={handleGoogleSignIn}>Google</button>
+        <p className="create-account">Already have an acount in ExamEase? <a href="/login">Login</a></p>
     </form>
 </div>
 </div>

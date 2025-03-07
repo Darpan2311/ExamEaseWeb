@@ -2,12 +2,15 @@ import React, { useState, useEffect } from "react";
 import "../css/home.css";
 import HeroImage from "../assets/std-Photoroom.png";
 import ClassMarkerSteps from "../components/ClassMarkerSteps";
+import { useNavigate } from "react-router-dom";
+import LoginPage from "./LoginPage";
 
 const Home = () => {
     const text = "Learning Made Easy";
     const [displayText, setDisplayText] = useState("L"); // Start with "L"
     const [index, setIndex] = useState(1); // Start from 1 (so "L" stays)
     const [isDeleting, setIsDeleting] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         let timeout;
@@ -43,7 +46,7 @@ const Home = () => {
                         <a href="#">About</a>
                         <a href="#">Contact</a>
                     </div>
-                    <button className="sign-in" id="loginbtn">Log In</button>
+                    <button className="sign-in" id="loginbtn" onClick={()=>{navigate("/login")}}>Log In</button>
                 </nav>
                 <div className="hero-content">
                     <div className="hero-text">
@@ -53,7 +56,7 @@ const Home = () => {
                             question bank management, automated grading, an analytical dashboard, and more...
                         </p>
                         <div className="btn-try">
-                            <button id="try-it">Sign Up</button>
+                            <button id="try-it"onClick={()=>{navigate("/register")}}>Sign Up</button>
                         </div>
                     </div>
                     <div className="hero-image">

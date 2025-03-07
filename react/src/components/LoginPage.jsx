@@ -28,18 +28,9 @@ const LoginPage = () => {
                     localStorage.setItem("jwtToken", token);
                     console.log("Login successful, token saved");
     
-                    // Validate the token by accessing a protected endpoint
-                    try {
-                        const protectedResponse = await axiosInstance.get("/user/home");
-                        if (protectedResponse.status === 200) {
-                            navigate("/home");
-                        } else {
-                            setErrorMessage("Failed to validate token.");
-                        }
-                    } catch (protectedError) {
-                        console.error("Token validation failed:", protectedError);
-                        setErrorMessage("Token validation failed. Please log in again.");
-                    }
+                    
+                            navigate("/student");
+                        
                 } else {
                     setErrorMessage("Failed to retrieve token.");
                 }

@@ -20,13 +20,9 @@ const GoogleLoginCallback = () => {
                     // Save the token to local storage
                     localStorage.setItem("jwtToken", token);
 
-                    // Validate the token by accessing a protected endpoint
-                    const protectedResponse = await axiosInstance.get("/user/home");
-                    if (protectedResponse.status === 200) {
-                        navigate("/home"); // Navigate to home page
-                    } else {
-                        setErrorMessage("Failed to validate token.");
-                    }
+                    
+                        navigate("/student"); // Navigate to home page
+                   
                 } else {
                     setErrorMessage("Authentication failed. Try again.");
                 }

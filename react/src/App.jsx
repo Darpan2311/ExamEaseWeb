@@ -6,7 +6,7 @@ import LoginPage from './components/LoginPage'
 import RegisterPage from './components/RegisterPage'
 import GoogleAuthCallback from './components/GoogleAuthCallback';
 import GoogleLoginCallback from './components/GoogleLoginCallback';
-import ExamInterface from './components/Exam-interface';
+import ExamInterface from './components/exam-interface';
 import TestBuilder from './components/TestBuilder';
 import ExamResults from './components/ExamResult';
 import StudentHome from './components/Studentdashboard';

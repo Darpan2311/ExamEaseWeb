@@ -46,7 +46,8 @@ const ExamResults = () => {
       submitted: "28 Feb 2023, 9:30 AM",
     },
   
-  ]);
+  ]); 
+
 
   return (
     <div className="exam-results-container" id="exam-res-caonteiner">
@@ -63,7 +64,7 @@ const ExamResults = () => {
         </div>
       </header>
 
-      <section className="exam-summary">
+      {/* <section className="exam-summary">
         <div className="stat-box">
           <p>Total Students</p>
           <h3>{summaryStats.totalStudents}</h3>
@@ -88,7 +89,7 @@ const ExamResults = () => {
           <p>Failed Students</p>
           <h3>{summaryStats.failedStudents}</h3>
         </div>
-      </section>
+      </section> */}
 
       <section className="publish-options">
       

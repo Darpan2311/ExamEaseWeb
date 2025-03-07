@@ -152,6 +152,7 @@ export default function TestBuilder() {
               </div>
               <input
                 type="text"
+             
                 id="exam-name"
                 value={examName}
                 onChange={(e) => setExamName(e.target.value)}
@@ -164,6 +165,7 @@ export default function TestBuilder() {
               </div>
               <input
                 type="text"
+                   
                 id="exam-sub"
                 onKeyDown={(e) => {
                   if (e.key === "Enter" && e.target.value.trim() !== "") {
@@ -185,11 +187,12 @@ export default function TestBuilder() {
         Difficulty Level:
         </div>
         <select
+          
           id="difficultySelect"
           value={difficulty}
           onChange={(e) => setDifficulty(e.target.value)}
         >
-          <option value="Beginner">Beginner</option>
+          <option value="Beginner" >Beginner</option>
           <option value="Intermediate">Intermediate</option>
           <option value="Master">Master</option>
         </select>
@@ -209,6 +212,7 @@ export default function TestBuilder() {
                   onChange={(e) => updateQuestionText(question.id, e.target.value)}
                   placeholder="Enter your question here..."
                   className="question-text"
+                
                 />
                 {question.options.map((option, optionIndex) => (
                   <div key={option.id} className="option-item">
@@ -220,6 +224,7 @@ export default function TestBuilder() {
                       id="option-radio"
                     />
                     <textarea
+                       className="modified-textarea"
                       value={option.text}
                       onChange={(e) => updateOptionText(question.id, option.id, e.target.value)}
                       placeholder="Enter option text..."
@@ -230,7 +235,7 @@ export default function TestBuilder() {
               </div>
             ))}
             <button onClick={addQuestion} className="add-question" disabled={!canAddQuestion}>Add New Question</button>
-            <button onClick={publishExam} id="publish-exam">Publish Exam</button>
+            <button onClick={publishExam} className="publish-btn">Publish Exam</button>
           </div>
         </div>
       </main>

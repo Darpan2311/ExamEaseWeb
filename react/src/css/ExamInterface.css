@@ -1,14 +1,15 @@
-.exam-interface{
-    width: 100dvw;
+#exam-interface{
+    width: 100vw;
+    height: 100vh;
     
 }
 
 
 /* Header Styles */
 .aheader {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
+    margin-top: 10px;
+    margin-right: 70px;
+    margin-bottom: 20px;
     width: 100vw;  /* Ensures it exactly matches the viewport width */
     padding: 0.5rem 1rem; /* Space inside without increasing width */
     box-sizing: border-box; /* Ensures padding is included in the width */
@@ -23,8 +24,11 @@
 }
 
 .timer {
+    margin-left: 1235px;
+    margin-right: 20px;
     font-size: 1.5rem;
     font-weight: 600;
+    margin-bottom: 10px;
     color: #fbbf24; /* Bright yellow for timer */
 }
 
@@ -32,7 +36,10 @@
     background-color: #ef4444; /* Bright red */
     color: #ffffff;
     padding: 0.5rem 1rem;
-    border: none;
+    width: 7%;
+
+    margin-bottom: 10px;
+    border: 1px solid white;
     border-radius: 0.375rem;
     cursor: pointer;
 }
@@ -49,10 +56,12 @@
     gap: 1.5rem;
     margin-top: 1.5rem;
     width: 100vw;
-   
+    height: 90.53vh;
 }
 
 .question-section {
+    margin-top: 50px;
+    margin-right: 20px;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
@@ -60,19 +69,21 @@
 
 .question-card {
     background-color: #33415500; /* Dark background for cards */
-    border: 1px solid #475569; /* Subtle border for contrast */
+    border: 1px solid #ffffff; /* Subtle border for contrast */
     border-radius: 0.75rem;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5); /* Stronger shadow for dark theme */
     padding: 1.5rem;
-    width: 53vw;
+  
+    width: 800px;
+    margin-left:200px ;
 
-    margin-right: 10px;
 }
 
 .question-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    margin: 1rem 2rem;
     margin-bottom: 1rem;
 }
 
@@ -102,10 +113,9 @@
 
 .answer-option {
     display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem;
-    border: 1px solid #475569;
+    gap: 1rem;
+    padding-left: 10px;
+    border: 1px solid white;
     border-radius: 0.5rem;
     margin-bottom: 0.75rem;
     cursor: pointer;
@@ -120,23 +130,21 @@
 /* Navigation Buttons */
 .navigation-buttons {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+  
+    margin-left: 200px;
     gap: 1rem; /* Added gap between buttons */
 }
 
 .nav-btn {
     width: 100px;
-    border: 1px solid #475569;
+    border: 1px solid #ffffff;
     border-radius: 0.375rem;
-    background-color: #334155;
+
     color: #e2e8f0;
     cursor: pointer;
 }
 
-.nav-btn:hover {
-    background-color: #475569;
-}
+
 
 .nav-btn:disabled {
     opacity: 0.5;
@@ -149,19 +157,20 @@
 }
 
 .mark-btn {
-    display: flex;
-    align-items: center;
-    padding: 0.5rem 1rem;
+        padding: 0.5rem 1rem;
     width: 150px;
-    text-align: center;
+    border: 1px solid #e2e8f0;
+
     border-radius: 0.375rem;
     background-color: #334155;
     color: #e2e8f0;
     cursor: pointer;
+    margin-left: 370px;
 }
 
 .mark-btn:hover {
-    background-color: #475569;
+    background-color: #c48c14;
+   
 }
 
 .mark-btn.marked {
@@ -178,29 +187,33 @@
     width: 200px;
     background-color: #3b82f6;
     color: #ffffff;
-    border: none;
     text-align: center;
     border-radius: 0.375rem;
     cursor: pointer;
+    border: 1px solid #e2e8f0;
 }
 
 .save-next-btn:hover {
-    background-color: #2563eb;
+    background-color: #0d732a;
+    
 }
 
 /* Sidebar Styles */
 .sidebar {
     display: flex;
+    height: fit-content;
     flex-direction: column;
-
+    margin-top: 40px;
+    margin-right: 100px;
     gap: 1.5rem;
 }
 
 .sidebar-card {
-    background-color: #33415520;
-    border: 1px solid #475569;
+
+    border: 1px solid #ffffff;
     border-radius: 0.75rem;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5);
+
+
     padding: 0.5rem;
     height: 550px;
     color: #e2e8f0;
@@ -209,6 +222,10 @@
 .sidebar-title {
     font-weight: 600;
     color: #f8fafc;
+    margin-left: 30px;
+
+
+    
 }
 
 .attempt-all {

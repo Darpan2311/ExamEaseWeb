@@ -101,7 +101,7 @@ import "../css/ExamInterface.css";
                   <p>{questions[currentQuestionIndex].text}</p>
                   <div className="answer-options">
                     {questions[currentQuestionIndex].options?.map((option, index) => (
-                      <label
+                      <div
                         key={index}
                         className={`answer-option ${answers.some(a => a.questionId === questions[currentQuestionIndex].id && a.selectedOptionId === option.id) ? 'selected' : ''}`}
                       >
@@ -111,8 +111,8 @@ import "../css/ExamInterface.css";
                           checked={answers.some(a => a.questionId === questions[currentQuestionIndex].id && a.selectedOptionId === option.id)}
                           onChange={() => handleAnswerSelect(option)}
                         />
-                        <span>{option.text}</span>
-                      </label>
+                        <p>{option.text}</p>
+                      </div>
                     ))}
                   </div>
                 </div>

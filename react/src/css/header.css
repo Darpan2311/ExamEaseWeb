@@ -11,19 +11,36 @@
     left: 0;
     right: 0;
   }
-  
+  .header-title{
+    margin-top: 50px;
+    margin-left: 40px; 
+     }
   .header-left {
     display: flex;
     align-items: center;
   }
   
-  .header-title {
-    font-size: 1.3rem;
-    font-weight: 100;
-    margin: 0px;
-    padding: 0px;
-    margin-left: 80px;
-  }
+  .sidebar-nav-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    font-size: 16px;
+    color: white;
+    border: none;
+    background: none;
+
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    width: 100%;
+    text-align: left;
+}
+
+.sidebar-nav-item:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Slightly stronger hover color */
+    transform: scale(1.02); /* Slightly enlarges button */
+    box-shadow: 0 2px 4px rgba(255, 255, 255, 0.2); /* Soft glow effect */
+    border-radius: 5px; /* Slight rounding for better feel */
+}
   
   .header-right {
     display: flex;
