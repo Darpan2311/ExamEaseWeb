@@ -147,71 +147,163 @@ body {
   }
   
   .main-header h1 {
-    font-size: 24px;
-    font-weight: 600;
-    margin-bottom: 8px;
-  }
+    font-family: 'Poppins', sans-serif; /* Modern & clean font */
+    font-size: 32px; /* Slightly larger for emphasis */
+    font-weight: 700; /* Bolder for better visibility */
+    margin-bottom: 12px; /* Increased spacing for better readability */
+    color: #d6d6d7; /* Darker shade for contrast */
+    text-transform: capitalize; /* Capitalizes the first letter of each word */
+    letter-spacing: 1px; /* Improves readability */
+    text-shadow: 2px 2px 4px rgba(168, 153, 153, 0.15); /* Adds subtle depth */
+    transition: all 0.3s ease-in-out;
+}
+
+.main-header h1:hover {
+    color: #ffffff; /* Changes color on hover */
+    transform: scale(1.009); /* Slightly enlarges the text */
+}
+
   
-  .main-header p {
-    color: #6b7280;
-  }
+.main-header p {
+  color: #c8d0d4; /* Slightly darker for better contrast */
+  font-size: 16px; /* Slightly larger for readability */
+  font-weight: 400; /* Keeps it clean and readable */
+  line-height: 1.6; /* Adds better spacing for readability */
+  margin-bottom: 12px; /* More breathing room */
+}
+
+.question-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive grid layout */
+  gap: 20px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+#exam-name-label{
+  color: white;
+}
+#exam-sub-label{
+  color: white;
+}
+
+/* Styling for Exam Name Input */
+#exam-name {
+  width: 90%;
+  padding: 5px;
+  margin-top: 7px;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  row-gap: 10px;
+  font-size: 14px;
+  transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+#exam-name:focus {
+  border-color: #3b82f6;
+  outline: none;
+  box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+}
+
+/* Styling for Subjects Input */
+#exam-sub {
+  width: 100%;
+  padding: 5px;
+  margin-top: 7px;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  margin-right: 50px;
+  transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+#exam-sub:focus {
+  border-color: #10b981;
+  outline: none;
+  box-shadow: 0 0 5px rgba(16, 185, 129, 0.5);
+}
+
+
+/* Style for the select element using its ID */
+#difficultySelect {
+  background-color: #f0f0f0; /* Light gray background */
+  border: 1px solid #ccc; /* Light gray border */
+  padding: 5px; /* Padding inside the select box */
+  font-size: 16px; /* Font size of the options */
+  color: #333; /* Text color */
+  border-radius: 4px; /* Rounded corners */
+  width: 200px; /* Width of the select box */
+}
+
+/* Style for the label using its id */
+label[for="difficultySelect"] {
+
+  font-size: 13px; /* Font size for the label */
+  margin-bottom: 8px; /* Space below the label */
+  display: block;
   
-  .question-meta {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 16px;
-    margin-bottom: 32px;
-  }
-  
-  .question-meta-item select {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #d1d5db;
-    border-radius: 8px;
-    font-size: 14px;
-  }
-  
-  .questions-listsolid #D1D5DB 
-  {
-  border-radius: 8px
-  ;
-  font-size: 14px
-  ;
-  }
-  
-  .questions-list {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-  
-  .question-item {
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    padding: 10px;
-    background-color: rgba(255, 255, 255, 0);
-  }
-  
-  .question-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
-  }
-  
-  .question-header h3 {
-    font-size: 18px;
-    font-weight: 600;
-  }
+}
+#ques {
+  border: 2px solid #ffffff; /* Blue border for a modern look */
+  border-radius: 10px; /* Rounded corners */
+  padding: 12px; /* More padding for spacing */
+  margin: 10px 5px; /* Adjusted margin */
+  /* Slight transparency */
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  transition: all 0.3s ease-in-out; /* Smooth hover effect */
+}
+
+
+
+#diff-lev{
+  color:white ;
+  font-family: sans-serif;
+  margin-bottom: 7px;
+}
+
+/* Adding some spacing and alignment */
+label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+
   
   .remove-question {
-    background: none;
+    color: white;
     border: none;
-    color: #ffffff;
-    width: 30%;
     background-color: #ef4444;
+    cursor: pointer;
+    width: 20%;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.15);
 
-  }
+    gap: 6px;
+    margin-top: 15px;
+    margin-right: 15px;
+}
+
+.remove-question:hover {
+    background-color: #dc2626;
+    transform: scale(1.05);
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.remove-question:active {
+    transform: scale(0.98);
+    box-shadow: none;
+}
+
   
   .question-content {
     display: flex;
@@ -227,41 +319,35 @@ body {
     font-size: 14px;
   }
   
-  .question-text,
-  .option-text {
+  #que-option{
+    width: 90%;
+    padding: 5px;
+    border: 1px solid #6880a5;
+    border-radius: 8px;
+    margin-left: 18px;
+    font-size: 14px;
+    margin: 5px;
+    resize: vertical;
+  }
+  #que-text {
     width: 90%;
     padding: 12px;
-    border: 1px solid #d1d5db;
+    border: 1px solid #6880a5;
     border-radius: 8px;
-    font-size: 14px;
+    margin-left: 18px;
+    margin-bottom: 10px;
+    font-size: 16px;
+
     resize: vertical;
+  }
+  #option-radio{
+    margin-top: 15px;
   }
   
   .question-text {
     min-height: 60px;
   }
-  
-  .option-text {
-    height: 30px;
-  }
-  
-  .option-item {
-    border: 1px solid #e5e7eb00;
-    border-radius: 8px;
-    padding: 10px;
-  }
-  
-  .option-header {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 12px;
-  }
-  
-  .option-header h4 {
-    font-size: 16px;
-    font-weight: 500;
-  }
+
   
   .remove-option {
     color: white;
@@ -345,3 +431,52 @@ body {
       grid-template-columns: 1fr;
     }
   }
+
+  #que-head {
+    margin-left: 10px;
+    padding: 8px 15px;
+   
+    color: white; /* White text */
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Soft shadow */
+    display: inline-block;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  }
+  
+  #que-head:hover {
+    transform: scale(1.03); /* Slight enlargement on hover */
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
+  }
+  
+
+  #publish-exams {
+    color: white;
+    border: none;
+    background-color: #11dd29;
+    cursor: pointer;
+    width: 20%;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.15);
+
+    gap: 6px;
+    margin-top: 15px;
+    margin-right: 15px;
+}
+
+#publish-exam:hover {
+    background-color: #056a14;
+    transform: scale(1.05);
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+#publish-exam:active {
+    transform: scale(0.98);
+    box-shadow: none;
+}

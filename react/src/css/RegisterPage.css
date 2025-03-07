@@ -14,7 +14,9 @@
     padding: 40px;
     box-shadow: 0 4px 20px rgba(18, 12, 26, 0.3); 
     text-align: center;
-    width: 20vw;
+    border: 1px solid #444c56;
+    border-radius: 5px;
+        width: 20vw;
     max-width: 400px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -169,4 +171,7 @@ a:hover {
     height: 1px;
     flex: 1;
     background-color: #444c56;
+}
+#user-profile-info{
+    margin-bottom: 50px;
 }

@@ -9,9 +9,9 @@ import GoogleLoginCallback from './components/GoogleLoginCallback';
 import ExamInterface from './components/Exam-interface';
 import TestBuilder from './components/TestBuilder';
 import ExamResults from './components/ExamResult';
-
 import StudentHome from './components/Studentdashboard';
-import  Home  from './components/Home';
+import Home from './components/home';
+import Roleselect from './components/Roleselect';
 
 function App() {
   
@@ -28,6 +28,7 @@ function App() {
       <Route path="/exam/create" element={<TestBuilder/>}/>
       <Route path="/exam/result" element={<ExamResults/>}/>
       <Route path='/student' element={<StudentHome/>}/>
+      <Route path='/api/auth/roleselect' element={<Roleselect/>}/>
       <Route path='/' element={<Home/>}/>
     </Routes>
   </Router>

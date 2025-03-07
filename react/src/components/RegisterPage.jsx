@@ -9,19 +9,29 @@ const RegisterPage = () => {
         username: '',
         password: '',
         confirmPassword: '',
-        role: ''
+        role: []  // Initialize as an array
     });
 
+
     const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+        const { name, value, checked } = e.target;
+
+        if (name === "role") {
+            setFormData((prevData) => ({
+                ...prevData,
+                role: checked
+                    ? [...prevData.role, value] // Add role if checked
+                    : prevData.role.filter((role) => role !== value) // Remove if unchecked
+            }));
+        } else {
+            setFormData({ ...formData, [name]: value });
+        }
     };
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // if (formData.password !== formData.confirmPassword) {
-        //     alert("Passwords do not match");
-        //     return;
-        // }
+      
             
         try {
             const response = await axios.post('http://localhost:8080/api/auth/register', {
@@ -38,7 +48,7 @@ const RegisterPage = () => {
     };
     const handleGoogleSignIn = async () => {
         try {
-            const googleOAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=435399769597-9imjl67qptanmrq6deach9ocicpmfrq3.apps.googleusercontent.com&redirect_uri=http://localhost:5173/api/auth/callback&response_type=code&scope=openid%20profile%20email`;
+            const googleOAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=435399769597-9imjl67qptanmrq6deach9ocicpmfrq3.apps.googleusercontent.com&redirect_uri=http://localhost:5173/api/auth/roleselect&response_type=code&scope=openid%20profile%20email`;
             window.location.href = googleOAuthUrl;
         } catch (error) {
             console.error("Google sign-in failed:", error);

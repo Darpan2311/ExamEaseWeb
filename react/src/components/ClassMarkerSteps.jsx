@@ -39,11 +39,11 @@ const ClassMarkerSteps = () => {
                     <div className="step-card" key={index}>
                         <div className="step-icon">{step.icon}</div>
                         <h3 className="step-title">{step.title}</h3>
-                        <ul className="step-points">
+                        <div className="step-points">
                             {step.points.map((point, i) => (
-                                <li key={i}>{point}</li>
+                                <div key={i} className="step-point">{point}</div>
                             ))}
-                        </ul>
+                        </div>
                     </div>
                 ))}
             </div>

@@ -32,8 +32,11 @@ public class RegisterController {
         MyUser user = new MyUser();
         user.setEmail(request.getEmail());
         user.setUsername(request.getUsername());
-        user.setPassword(passwordEncoder.encode(request.getPassword()));  // Encrypt password
-        user.setRole(request.getRole());
+        user.setPassword(passwordEncoder.encode(request.getPassword())); // Encrypt password
+
+        // Convert list of roles to a comma-separated string
+        String roleString = String.join(",", request.getRole());
+        user.setRole(roleString); // Store roles as "USER,TEACHER"
 
         // Generate a verification token and set it to the user
         String verificationToken = UUID.randomUUID().toString();
@@ -43,8 +46,8 @@ public class RegisterController {
         userRepo.save(user);
 
         // Send email with the verification link
-        emailService.sendVerificationEmail(user.getEmail(), verificationToken);
-
+       // emailService.sendVerificationEmail(user.getEmail(), verificationToken);
         return "User registered successfully! Please check your email to verify your account.";
     }
+
 }

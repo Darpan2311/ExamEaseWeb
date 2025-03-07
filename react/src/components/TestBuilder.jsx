@@ -143,22 +143,28 @@ export default function TestBuilder() {
         <div className="container">
           <header className="main-header">
             <h1>Welcome back <UserName/></h1>
-            <p>Build and publish your tests in no time.</p>
+            <p>Build and publish your tests in time.</p>
           </header>
           <div className="question-meta">
             <label>
+              <div id="exam-name-label">
               Exam Name:
+              </div>
               <input
                 type="text"
+                id="exam-name"
                 value={examName}
                 onChange={(e) => setExamName(e.target.value)}
                 placeholder="Enter exam name"
               />
             </label>
             <label>
+            <div id="exam-sub-label">
               Subjects:
+              </div>
               <input
                 type="text"
+                id="exam-sub"
                 onKeyDown={(e) => {
                   if (e.key === "Enter" && e.target.value.trim() !== "") {
                     setSubjects([...subjects, e.target.value.trim()]);
@@ -173,23 +179,32 @@ export default function TestBuilder() {
                 <li key={index}>{subject}</li>
               ))}
             </ul>
-            <label>
-              Difficulty Level:
-              <select value={difficulty} onChange={(e) => setDifficulty(e.target.value)}>
-                <option value="Beginner">Beginner</option>
-                <option value="Intermediate">Intermediate</option>
-                <option value="Master">Master</option>
-              </select>
-            </label>
+            <div>
+      <label htmlFor="difficultySelect" >
+        <div id="diff-lev">
+        Difficulty Level:
+        </div>
+        <select
+          id="difficultySelect"
+          value={difficulty}
+          onChange={(e) => setDifficulty(e.target.value)}
+        >
+          <option value="Beginner">Beginner</option>
+          <option value="Intermediate">Intermediate</option>
+          <option value="Master">Master</option>
+        </select>
+      </label>
+    </div>
           </div>
-          <div className="questions-list">
+          <div className="questions-list" >
             {questions.map((question, index) => (
-              <div key={question.id} className="question-item">
+              <div key={question.id} className="question-item" id="ques">
                 <div className="question-header">
-                  <h3>Question {index + 1}</h3>
+                  <h3 id="que-head">Question {index + 1}</h3>
                   <button onClick={() => removeQuestion(question.id)} className="remove-question">Remove Question</button>
                 </div>
                 <textarea
+                id="que-text"
                   value={question.text}
                   onChange={(e) => updateQuestionText(question.id, e.target.value)}
                   placeholder="Enter your question here..."
@@ -202,19 +217,20 @@ export default function TestBuilder() {
                       name={`correct-answer-${question.id}`}
                       onChange={() => selectCorrectAnswer(question.id, option.id)}
                       checked={question.correctAnswer === option.id}
+                      id="option-radio"
                     />
                     <textarea
                       value={option.text}
                       onChange={(e) => updateOptionText(question.id, option.id, e.target.value)}
                       placeholder="Enter option text..."
-                      className="option-text"
+                     id="que-option"
                     />
                   </div>
                 ))}
               </div>
             ))}
             <button onClick={addQuestion} className="add-question" disabled={!canAddQuestion}>Add New Question</button>
-            <button onClick={publishExam} className="publish-exam">Publish Exam</button>
+            <button onClick={publishExam} id="publish-exam">Publish Exam</button>
           </div>
         </div>
       </main>

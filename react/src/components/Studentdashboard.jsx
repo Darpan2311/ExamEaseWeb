@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ExamCard } from "../components/ExamCard";
 import axiosInstance from "../axiosConfig"; // Import axios instance
 import "../css/studentdashboard.css";
-import Sidenav from "./sidenav";
+import Sidenav from "./Sidenav";
 import Header from "./header";
 
 export default function StudentHome() {

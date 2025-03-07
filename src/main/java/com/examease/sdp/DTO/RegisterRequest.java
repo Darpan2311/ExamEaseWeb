@@ -1,10 +1,12 @@
 package com.examease.sdp.DTO;
 
+import java.util.List;
+
 public class RegisterRequest {
     private String email;
     private String username;
     private String password;
-    private String role;
+    private List<String> role;
 
     public String getEmail() {
         return email;
@@ -14,11 +16,11 @@ public class RegisterRequest {
         this.email = email;
     }
 
-    public String getRole() {
+    public List<String> getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(List<String> role) {
         this.role = role;
     }
 

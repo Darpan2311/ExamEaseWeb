@@ -9,7 +9,7 @@ const GoogleAuthCallback = () => {
     useEffect(() => {
         const queryParams = new URLSearchParams(window.location.search);
         const code = queryParams.get("code");
-
+        
         const authenticateWithGoogle = async () => {
             try {
                 const response = await axiosInstance.post(`/api/auth/google/callback`, {
@@ -23,7 +23,7 @@ const GoogleAuthCallback = () => {
 
                     const protectedResponse = await axiosInstance.get("/user/home");
                     if (protectedResponse.status === 200) {
-                        navigate("/home");
+                        navigate("/roleselect");
                     } else {
                         setErrorMessage("Failed to validate token.");
                     }

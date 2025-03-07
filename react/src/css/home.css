@@ -17,7 +17,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px 50px;
-    background: rgba(10, 8, 23, 0.9);
+    background: rgb(16 13 39 / 44%);
     z-index: 1000; /* Ensure it stays above other elements */
 }
 
@@ -145,20 +145,23 @@
     text-align: center;
     padding: 60px 20px;
     background: linear-gradient(to bottom, #000, #181b2c);
+    min-height: 100vh;
 }
 
 .steps-title {
-    font-size: 32px;
+    font-size: 36px;
     font-weight: bold;
     color: #ffffff;
     margin-bottom: 40px;
     position: relative;
     display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
 .steps-title::after {
     content: "";
-    width: 50%;
+    width: 60%;
     height: 3px;
     background: #ff7043;
     position: absolute;
@@ -177,21 +180,26 @@
     padding-top: 20px;
 }
 
-/* Individual Step Card */
+/* Step Card */
 .step-card {
-    border: 0.5px solid white;
-    box-shadow: 0 4px 20px rgba(18, 12, 26, 0.3);
+    background: linear-gradient(to bottom, #000, #181b2c);
+    border: 1px solid #444;
+    box-shadow: 0 8px 20px rgba(18, 12, 26, 0.3);
     color: white;
     padding: 25px;
     border-radius: 15px;
-    width: 260px;
+    width: 280px;
     text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.5s ease, box-shadow 0.5s ease, background 0.5s ease;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
 }
 
 .step-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.25);
+    transform: translateY(-10px);
+    box-shadow: 0 15px 25px rgba(42, 44, 59, 0.35);
+    background: linear-gradient(145deg, #000000, #1f1f50);
 }
 
 /* Step Icon */
@@ -200,32 +208,50 @@
     margin-bottom: 15px;
     display: flex;
     justify-content: center;
-    background-color: #c94925;
-    border: 1px solid rgb(201, 105, 27);
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
     align-items: center;
+    background-color: #ff6f47;
+    border: 2px solid #ff8a65;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
     margin: auto;
+    transition: transform 0.5s ease;
+}
+
+.step-card:hover .step-icon {
+    transform: rotate(360deg);
+}
+
+/* Step Title */
+.step-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Step Points */
+.step-points {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.step-point {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background 0.5s ease;
+}
+
+.step-card:hover .step-point {
+    background: rgba(255, 255, 255, 0.2);
 }
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-    .hero-content {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .hero-text {
-        max-width: 100%;
-    }
-
-    .hero-image {
-        position: static;
-        max-width: 70%;
-        margin-top: 20px;
-    }
-
     .steps-grid {
         flex-direction: column;
         align-items: center;
