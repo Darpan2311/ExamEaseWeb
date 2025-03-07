@@ -5,12 +5,22 @@ public class ExamResultResponse {
     private int correctAnswers;
     private int incorrectAnswers;
     private Double totalTimeSpent;
+    private String username;
 
-    public ExamResultResponse(int totalScore, int correctAnswers, int incorrectAnswers, Double totalTimeSpent) {
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public ExamResultResponse(int totalScore, int correctAnswers, int incorrectAnswers, Double totalTimeSpent, String username) {
         this.totalScore = totalScore;
         this.correctAnswers = correctAnswers;
         this.incorrectAnswers = incorrectAnswers;
         this.totalTimeSpent = totalTimeSpent;
+        this.username=username;
     }
 
     public int getTotalScore() {

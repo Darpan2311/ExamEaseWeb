@@ -2,10 +2,7 @@ package com.examease.sdp.controller;
 
 import com.examease.sdp.DTO.ExamResultResponse;
 import com.examease.sdp.DTO.ExamSubmissionRequest;
-import com.examease.sdp.model.Exam;
-import com.examease.sdp.model.Question;
-import com.examease.sdp.model.StudentAnswer;
-import com.examease.sdp.model.Submission;
+import com.examease.sdp.model.*;
 import com.examease.sdp.service.ExamService;
 import com.examease.sdp.service.SubmissionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +21,7 @@ public class ExamController {
     private final ExamService examService;
     @Autowired
     private SubmissionService submissionService;
+    private SubmissionRepo submissionRepo;
 
     public ExamController(ExamService examService) {
         this.examService = examService;
@@ -73,7 +71,8 @@ public class ExamController {
                 submission.getTotalScore(),
                 submission.getCorrectAnswers(),
                 submission.getIncorrectAnswers(),
-                submission.getTotalTimeSpent()
+                submission.getTotalTimeSpent(),
+                submission.getStudent().getUsername()
         );
 
         return ResponseEntity.ok(response);

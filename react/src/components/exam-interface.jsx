@@ -56,9 +56,9 @@ import "../css/ExamInterface.css";
       };
   
       console.log("Submitting Answers:", payload);
-  
-      await axiosInstance.post(`/api/exams/${examId}/submit`, payload);
-      navigate(`/exam/${examId}/result`);
+      const response = await axiosInstance.post(`/api/exams/${examId}/submit`, payload);
+      const submissionId = response.data.id; 
+      navigate(`/result/${submissionId}`);
     } catch (error) {
       console.error("Error submitting exam:", error.response?.data || error.message);
     }

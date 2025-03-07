@@ -15,7 +15,6 @@ const GoogleAuthCallback = () => {
                 const response = await axiosInstance.post(`/api/auth/google/callback`, {
                     code,
                 });
-
                 if (response.status === 200 && response.data.token) {
                     const { token } = response.data;
 
