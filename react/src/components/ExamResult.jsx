@@ -10,6 +10,8 @@ ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Title, Legend)
 const ExamResults = () => {
   const { submissionId } = useParams();
   const [examResult, setExamResult] = useState(null);
+  const [scoreDistribution, setScoreDistribution] = useState(null);
+  const [currentScoreRange, setCurrentScoreRange] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -18,37 +20,74 @@ const ExamResults = () => {
       try {
         const response = await axiosInstance.get(`/api/exams/${submissionId}/result`);
         setExamResult(response.data);
- 
+  
+        // Ensure totalQuestions is properly calculated
+        const totalQuestions =
+          response.data.correctAnswers +
+          response.data.incorrectAnswers +
+          response.data.unattemptedQuestion;
+  
+        if (totalQuestions > 0) {
+          const totalMarks = totalQuestions * 4;
+          const scorePercentage = Math.round((response.data.totalScore / totalMarks) * 100);
+          const index = Math.min(Math.floor(scorePercentage / 10), 9);
+          const range = `${index * 10}-${(index + 1) * 10}%`;
+          setCurrentScoreRange(range);
+        } else {
+          setCurrentScoreRange("0-10%"); // Default fallback for edge cases
+        }
       } catch (err) {
         setError(err.response?.data || "Failed to fetch exam results");
+      }
+    };
+  
+    const fetchScoreDistribution = async () => {
+      try {
+        const response = await axiosInstance.get(`/api/exams/${submissionId}/score-distribution`);
+        setScoreDistribution(response.data);
+      } catch (err) {
+        setError(err.response?.data || "Failed to fetch score distribution");
       } finally {
         setLoading(false);
       }
     };
-
+  
     fetchExamResult();
+    fetchScoreDistribution();
   }, [submissionId]);
-       console.log(examResult);
+  
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p className="error">{error}</p>;
- 
+
   const totalQuestions = examResult.correctAnswers + examResult.incorrectAnswers + examResult.unattemptedQuestion;
   const totalMarks = totalQuestions * 4;
-  const passingMarks = (totalMarks * 0.3).toFixed(2); // Rounded to 2 decimal places
+  const passingMarks = (totalMarks * 0.3).toFixed(2);
   const isPassed = examResult.totalScore >= passingMarks;
 
+  const labels = scoreDistribution ? Object.keys(scoreDistribution) : [];
+  const dataValues = scoreDistribution ? Object.values(scoreDistribution) : [];
+
+  // Highlight the current submission's range
+  const backgroundColors = labels.map(label => 
+    label === currentScoreRange ? "#FF5733" : "#36A2EB"
+  );
+
   const chartData = {
-    labels: ["You", "Student B", "Student C", "Student D"],
+    labels,
     datasets: [
       {
-        label: "Scores",
-        data: [examResult.totalScore, 32, 45, 28], 
-        backgroundColor: ["#4CAF50", "#FF6384", "#36A2EB", "#FFCE56"],
+        label: "Number of Submissions",
+        data: dataValues,
+        backgroundColor: backgroundColors,
         borderColor: "#fff",
         borderWidth: 1,
       },
     ],
   };
+
+  console.log("Chart Labels:", chartData.labels);
+  console.log("Chart Data:", chartData.datasets[0].data);
 
   return (
     <div className="exam-results-container">
@@ -68,7 +107,6 @@ const ExamResults = () => {
           <p>Your Score</p>
           <h3>{examResult.totalScore}</h3>
         </div>
-        
         <div className="stat-box">
           <p>Correct Answers</p>
           <h3>{examResult.correctAnswers}</h3>
@@ -76,7 +114,6 @@ const ExamResults = () => {
         <div className="stat-box">
           <p>Incorrect Answers</p>
           <h3>{examResult.incorrectAnswers}</h3>
-
         </div>
         <div className="stat-box">
           <p>Unattempted</p>
@@ -93,8 +130,19 @@ const ExamResults = () => {
       </section>
 
       <section className="chart-container">
-        <h3>Student Score Comparison</h3>
-         <Bar data={chartData} options={{ responsive: true, plugins: { legend: { display: false } } }} />
+        <h3>Score Distribution</h3>
+        <Bar
+          data={chartData}
+          options={{
+            responsive: true,
+            scales: {
+              x: { title: { display: true, text: "Score Ranges (%)" } },
+              y: { title: { display: true, text: "Number of Submissions" }, beginAtZero: true, ticks: { stepSize: 1 } }
+            },
+            plugins: { legend: { display: false } }
+          }}
+        />
+        {currentScoreRange && <p><strong>Your Score Range:</strong> {currentScoreRange}</p>}
       </section>
     </div>
   );

@@ -27,8 +27,6 @@ public class Submission {
     private int correctAnswers;
     private int incorrectAnswers;
 
-    // Getters and Setters
-
     public int getUnattemptedQuestions() {
         return unattemptedQuestions;
     }
@@ -102,5 +100,9 @@ public class Submission {
 
     public void setSubmittedAt(LocalDateTime submittedAt) {
         this.submittedAt = submittedAt;
+    }
+
+    public int getTotalQuestions() {
+        return this.unattemptedQuestions+this.correctAnswers+this.incorrectAnswers;
     }
 }
