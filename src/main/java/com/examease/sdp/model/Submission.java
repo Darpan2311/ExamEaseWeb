@@ -20,7 +20,7 @@ public class Submission {
 
     @OneToMany(mappedBy = "submission", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<StudentAnswer> answers;
-
+    private int unattemptedQuestions;
     private LocalDateTime submittedAt;
     private Double totalTimeSpent;
     private int totalScore;
@@ -28,6 +28,14 @@ public class Submission {
     private int incorrectAnswers;
 
     // Getters and Setters
+
+    public int getUnattemptedQuestions() {
+        return unattemptedQuestions;
+    }
+
+    public void setUnattemptedQuestions(int unattemptedQuestions) {
+        this.unattemptedQuestions = unattemptedQuestions;
+    }
 
     public int getTotalScore() {
         return totalScore;

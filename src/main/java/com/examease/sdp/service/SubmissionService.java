@@ -40,7 +40,7 @@ public class SubmissionService {
         submission.setExam(exam);
         submission.setSubmittedAt(LocalDateTime.now());
         submission.setTotalTimeSpent(totalTimeSpent);
-
+        submission.setUnattemptedQuestions(exam.getTotalquestion()-answers.size());
         Submission savedSubmission = submissionRepo.save(submission);
 
         int correctAnswers = 0;

@@ -40,12 +40,12 @@ const Home = () => {
             <div className="hero-container">
                 <nav className="navbar">
                     <div className="logo">ExamEase</div>
-                    <div className="nav-links">
+                    {/* <div className="nav-links">
                         <a href="#">Exams</a>
                         <a href="#">Benefits</a>
                         <a href="#">About</a>
                         <a href="#">Contact</a>
-                    </div>
+                    </div> */}
                     <button className="sign-in" id="loginbtn" onClick={()=>{navigate("/login")}}>Log In</button>
                 </nav>
                 <div className="hero-content">

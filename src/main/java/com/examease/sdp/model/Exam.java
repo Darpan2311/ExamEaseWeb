@@ -12,6 +12,16 @@ public class Exam {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private int totalquestion;
+
+    public int getTotalquestion() {
+        return totalquestion;
+    }
+
+    public void setTotalquestion(int totalquestion) {
+        this.totalquestion = totalquestion;
+    }
+
     public String getAuthor() {
         return author;
     }

@@ -1,134 +1,100 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import axiosInstance from "../axiosConfig";
+import { Bar } from "react-chartjs-2";
+import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, Tooltip, Title, Legend } from "chart.js";
 import "../css/ExamResults.css";
 
+ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Title, Legend);
+
 const ExamResults = () => {
-  const [examDetails] = useState({
-    examTitle: "Gate Exam",
-    course: "CSE",
-    date: "28 Feb 2023 9:00 AM - 11:00 AM",
-    duration: "3 hr",
-    totalMarks: 50,
-    passMarks: 40,
-  });
+  const { submissionId } = useParams();
+  const [examResult, setExamResult] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const [summaryStats] = useState({
-    totalStudents: 400,
-    averageScore: 100,
-    absentStudents: 12,
-    finishedStudents: 365,
-    passedStudents: 365,
-    failedStudents: 35,
-  });
+  useEffect(() => {
+    const fetchExamResult = async () => {
+      try {
+        const response = await axiosInstance.get(`/api/exams/${submissionId}/result`);
+        setExamResult(response.data);
+ 
+      } catch (err) {
+        setError(err.response?.data || "Failed to fetch exam results");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const [attendedStudents] = useState([
-    {
-      name: "Abc",
-      status: "Passed",
-      score: "45/50 (85%)",
-      grade: "Excellent",
-      timeSpent: "22 MIN",
-      submitted: "28 Feb 2023, 10:50 AM",
-    },
-    {
-      name: "xyz",
-      status: "Passed",
-      score: "35/50 (68%)",
-      grade: "Average",
-      timeSpent: "22 MIN",
-      submitted: "28 Feb 2023, 9:40 AM",
-    },
-    {
-      name: "pqr",
-      status: "Failed",
-      score: "15/50 (28%)",
-      grade: "Poor",
-      timeSpent: "22 MIN",
-      submitted: "28 Feb 2023, 9:30 AM",
-    },
-  
-  ]); 
+    fetchExamResult();
+  }, [submissionId]);
+       console.log(examResult);
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p className="error">{error}</p>;
+ 
+  const totalQuestions = examResult.correctAnswers + examResult.incorrectAnswers + examResult.unattemptedQuestion;
+  const totalMarks = totalQuestions * 4;
+  const passingMarks = (totalMarks * 0.3).toFixed(2); // Rounded to 2 decimal places
+  const isPassed = examResult.totalScore >= passingMarks;
 
+  const chartData = {
+    labels: ["You", "Student B", "Student C", "Student D"],
+    datasets: [
+      {
+        label: "Scores",
+        data: [examResult.totalScore, 32, 45, 28], 
+        backgroundColor: ["#4CAF50", "#FF6384", "#36A2EB", "#FFCE56"],
+        borderColor: "#fff",
+        borderWidth: 1,
+      },
+    ],
+  };
 
   return (
-    <div className="exam-results-container" id="exam-res-caonteiner">
+    <div className="exam-results-container">
       <header className="exam-header">
         <h1>Exam Results</h1>
         <div className="exam-info">
-          <h2>{examDetails.examTitle}</h2>
-          <p>{examDetails.course}</p>
-          <p>{examDetails.date}</p>
-          <p>
-            <b>Duration:</b> {examDetails.duration} | <b>Total Marks:</b>{" "}
-            {examDetails.totalMarks} (Pass marks: {examDetails.passMarks})
-          </p>
+          <p><b>Duration:</b> 3 hr</p>
+          <p><b>Total Marks:</b> {totalMarks}</p>
+          <p><b>Passing Marks:</b> {passingMarks} (30%)</p>
+          <p><b>Marking Scheme:</b> +4/-1</p>
+          <p><b>Total Questions:</b> {totalQuestions}</p>
         </div>
       </header>
 
-      {/* <section className="exam-summary">
+      <section className="exam-summary">
         <div className="stat-box">
-          <p>Total Students</p>
-          <h3>{summaryStats.totalStudents}</h3>
+          <p>Your Score</p>
+          <h3>{examResult.totalScore}</h3>
+        </div>
+        
+        <div className="stat-box">
+          <p>Correct Answers</p>
+          <h3>{examResult.correctAnswers}</h3>
         </div>
         <div className="stat-box">
-          <p>Average Score</p>
-          <h3>{summaryStats.averageScore}</h3>
-        </div>
-        <div className="stat-box">
-          <p>Absent Students</p>
-          <h3>{summaryStats.absentStudents}</h3>
-        </div>
-        <div className="stat-box">
-          <p>Finished Students</p>
-          <h3>{summaryStats.finishedStudents}</h3>
-        </div>
-        <div className="stat-box">
-          <p>Passed Students</p>
-          <h3>{summaryStats.passedStudents}</h3>
-        </div>
-        <div className="stat-box">
-          <p>Failed Students</p>
-          <h3>{summaryStats.failedStudents}</h3>
-        </div>
-      </section> */}
+          <p>Incorrect Answers</p>
+          <h3>{examResult.incorrectAnswers}</h3>
 
-      <section className="publish-options">
-      
-
-      
+        </div>
+        <div className="stat-box">
+          <p>Unattempted</p>
+          <h3>{examResult.unattemptedQuestion}</h3>
+        </div>
+        <div className="stat-box">
+          <p>Total Time Spent</p>
+          <h3>{examResult.totalTimeSpent} sec</h3>
+        </div>
+        <div className={`stat-box ${isPassed ? "pass" : "fail"}`}>
+          <p>Status</p>
+          <h3>{isPassed ? "Passed 🎉" : "Failed ❌"}</h3>
+        </div>
       </section>
 
-      <section className="student-list">
-        <h3>Attended ({attendedStudents.length})</h3>
-        <table className="students-table">
-          <thead>
-            <tr>
-              <th>Student Name</th>
-              <th>Passed/Failed</th>
-              <th>Score</th>
-              <th>Grade</th>
-              <th>Time Spent</th>
-              <th>Submitted</th>
-            </tr>
-          </thead>
-          <tbody>
-            {attendedStudents.map((student, index) => (
-              <tr key={index}>
-                <td>{student.name}</td>
-                <td
-                  className={
-                    student.status === "Passed" ? "status-passed" : "status-failed"
-                  }
-                >
-                  {student.status}
-                </td>
-                <td>{student.score}</td>
-                <td>{student.grade}</td>
-                <td>{student.timeSpent}</td>
-                <td>{student.submitted}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <section className="chart-container">
+        <h3>Student Score Comparison</h3>
+         <Bar data={chartData} options={{ responsive: true, plugins: { legend: { display: false } } }} />
       </section>
     </div>
   );

@@ -20,9 +20,7 @@ const GoogleLoginCallback = () => {
                     // Save the token to local storage
                     localStorage.setItem("jwtToken", token);
 
-                    
-                        navigate("/student"); // Navigate to home page
-                   
+                    navigate("/student"); // Navigate to home page
                 } else {
                     setErrorMessage("Authentication failed. Try again.");
                 }
@@ -35,7 +33,11 @@ const GoogleLoginCallback = () => {
         loginWithGoogle();
     }, [navigate]);
 
-    return <div>{errorMessage ? <p>{errorMessage}</p> : <p>Logging you in...</p>}</div>;
+    return (
+        <div style={{ display: "flex", height: "100vh" }}>
+            <p>{errorMessage || "Logging you in..."}</p>
+        </div>
+    );
 };
 
 export default GoogleLoginCallback;

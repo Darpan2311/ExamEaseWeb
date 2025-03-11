@@ -78,7 +78,6 @@ import "../css/ExamInterface.css";
     setQuestionStartTime(Date.now());
   };
   
-  
   return (
     <div id="exam-interface">
       <header className="aheader">

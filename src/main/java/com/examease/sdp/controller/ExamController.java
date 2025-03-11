@@ -72,9 +72,9 @@ public class ExamController {
                 submission.getCorrectAnswers(),
                 submission.getIncorrectAnswers(),
                 submission.getTotalTimeSpent(),
-                submission.getStudent().getUsername()
+                submission.getStudent().getUsername(),
+                submission.getUnattemptedQuestions()
         );
-
         return ResponseEntity.ok(response);
     }
 }

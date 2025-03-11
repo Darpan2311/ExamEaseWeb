@@ -6,6 +6,15 @@ public class ExamResultResponse {
     private int incorrectAnswers;
     private Double totalTimeSpent;
     private String username;
+    private int unattemptedQuestion;
+
+    public int getUnattemptedQuestion() {
+        return unattemptedQuestion;
+    }
+
+    public void setUnattemptedQustion(int unattemptedQustion) {
+        this.unattemptedQuestion = unattemptedQustion;
+    }
 
     public String getUsername() {
         return username;
@@ -15,12 +24,13 @@ public class ExamResultResponse {
         this.username = username;
     }
 
-    public ExamResultResponse(int totalScore, int correctAnswers, int incorrectAnswers, Double totalTimeSpent, String username) {
+    public ExamResultResponse(int totalScore, int correctAnswers, int incorrectAnswers, Double totalTimeSpent, String username, int unattemptedQuestions) {
         this.totalScore = totalScore;
         this.correctAnswers = correctAnswers;
         this.incorrectAnswers = incorrectAnswers;
         this.totalTimeSpent = totalTimeSpent;
         this.username=username;
+        this.unattemptedQuestion=unattemptedQuestions;
     }
 
     public int getTotalScore() {
