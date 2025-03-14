@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import './App.css'
-import LoginPage from './components/LoginPage'
 
+import LoginPage from './components/LoginPage'
 import RegisterPage from './components/RegisterPage'
 import GoogleAuthCallback from './components/GoogleAuthCallback';
 import GoogleLoginCallback from './components/GoogleLoginCallback';
@@ -10,8 +10,11 @@ import ExamInterface from './components/exam-interface';
 import TestBuilder from './components/TestBuilder';
 import ExamResults from './components/ExamResult';
 import StudentHome from './components/Studentdashboard';
-import Home from './components/home';
+import Home from './components/Home';
 import Roleselect from './components/Roleselect';
+import ExamSummary from './components/ExamSummary';
+
+
 
 function App() {
   
@@ -29,6 +32,7 @@ function App() {
       <Route path="/result/:submissionId" element={<ExamResults/>}/>
       <Route path='/student' element={<StudentHome/>}/>
       <Route path='/api/auth/roleselect' element={<Roleselect/>}/>
+      <Route path="/summary/:submissionId" element={<ExamSummary />} />
       <Route path='/' element={<Home/>}/>
     </Routes>
   </Router>

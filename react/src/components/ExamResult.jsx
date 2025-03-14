@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axiosInstance from "../axiosConfig";
 import { Bar } from "react-chartjs-2";
 import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, Tooltip, Title, Legend } from "chart.js";
@@ -8,7 +9,15 @@ import "../css/ExamResults.css";
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Title, Legend);
 
 const ExamResults = () => {
+
   const { submissionId } = useParams();
+  const navigate = useNavigate();  // Initialize navigation
+
+  const viewAllAnswers =  () => {
+    navigate(`/summary/${submissionId}`);
+  };
+
+
   const [examResult, setExamResult] = useState(null);
   const [scoreDistribution, setScoreDistribution] = useState(null);
   const [currentScoreRange, setCurrentScoreRange] = useState(null);
@@ -100,6 +109,10 @@ const ExamResults = () => {
           <p><b>Marking Scheme:</b> +4/-1</p>
           <p><b>Total Questions:</b> {totalQuestions}</p>
         </div>
+        
+     <button className="review-button" onClick={viewAllAnswers}>
+          View all Ans
+        </button>
       </header>
 
       <section className="exam-summary">
@@ -120,9 +133,14 @@ const ExamResults = () => {
           <h3>{examResult.unattemptedQuestion}</h3>
         </div>
         <div className="stat-box">
-          <p>Total Time Spent</p>
-          <h3>{examResult.totalTimeSpent} sec</h3>
-        </div>
+  <p>Total Time Spent</p>
+  <h3>
+    {String(Math.floor(examResult.totalTimeSpent / 3600)).padStart(2, '0')}:
+    {String(Math.floor((examResult.totalTimeSpent % 3600) / 60)).padStart(2, '0')}:
+    {String(examResult.totalTimeSpent % 60).padStart(2, '0')}
+  </h3>
+</div>
+
         <div className={`stat-box ${isPassed ? "pass" : "fail"}`}>
           <p>Status</p>
           <h3>{isPassed ? "Passed 🎉" : "Failed ❌"}</h3>
