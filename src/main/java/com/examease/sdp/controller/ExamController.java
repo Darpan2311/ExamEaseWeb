@@ -70,14 +70,15 @@ public class ExamController {
     @GetMapping("/{submissionId}/result")
     public ResponseEntity<ExamResultResponse> getExamResult(@PathVariable Long submissionId) {
         Submission submission = submissionService.getSubmissionById(submissionId);
-
+        int rank = submissionService.getRank(submissionId);
         ExamResultResponse response = new ExamResultResponse(
                 submission.getTotalScore(),
                 submission.getCorrectAnswers(),
                 submission.getIncorrectAnswers(),
                 submission.getTotalTimeSpent(),
                 submission.getStudent().getUsername(),
-                submission.getUnattemptedQuestions()
+                submission.getUnattemptedQuestions(),
+                rank
         );
         return ResponseEntity.ok(response);
     }

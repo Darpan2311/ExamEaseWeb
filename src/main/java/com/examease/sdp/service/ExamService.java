@@ -19,6 +19,7 @@ public class ExamService {
     @Transactional
     public Exam saveExam(Exam exam) {
         if (exam.getQuestions() != null) {
+            exam.setTotalquestion(exam.getQuestions().size());
             for (Question question : exam.getQuestions()) {
                 question.setExam(exam);
 
@@ -41,6 +42,7 @@ public class ExamService {
                 for (Option option : question.getOptions()) {
                     option.setQuestion(question);
                 }
+
             }
         }
 

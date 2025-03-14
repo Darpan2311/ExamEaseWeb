@@ -81,4 +81,9 @@ public class SubmissionService {
         return submissionRepo.findById(submissionId)
                 .orElseThrow(() -> new RuntimeException("Submission not found"));
     }
+
+    public int getRank(Long submissionId) {
+        Submission submission = getSubmissionById(submissionId);
+        return submissionRepo.findRank(submission.getExam().getId(), submission.getTotalScore());
+    }
 }

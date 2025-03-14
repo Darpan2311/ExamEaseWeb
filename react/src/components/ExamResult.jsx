@@ -69,19 +69,25 @@ const ExamResults = () => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p className="error">{error}</p>;
 
-  const totalQuestions = examResult.correctAnswers + examResult.incorrectAnswers + examResult.unattemptedQuestion;
+  const totalQuestions = examResult.correctAnswer + examResult.incorrectAnswers + examResult.unattemptedQuestion;
   const totalMarks = totalQuestions * 4;
   const passingMarks = (totalMarks * 0.3).toFixed(2);
   const isPassed = examResult.totalScore >= passingMarks;
+  const sortedScores = scoreDistribution 
+  ? Object.entries(scoreDistribution)
+      .sort((a, b) => {
+        const numA = parseInt(a[0].split("-")[0]); // Extract first number (e.g., 100 from "100-90%")
+        const numB = parseInt(b[0].split("-")[0]); // Extract first number (e.g., 90 from "90-80%")
+        return numB - numA; // Sort in descending order
+      })
+  : [];
 
-  const labels = scoreDistribution ? Object.keys(scoreDistribution) : [];
-  const dataValues = scoreDistribution ? Object.values(scoreDistribution) : [];
-
+const labels = sortedScores.map(([key]) => key);
+const dataValues = sortedScores.map(([_, value]) => value);
   // Highlight the current submission's range
-  const backgroundColors = labels.map(label => 
+  const backgroundColors = labels.map(label =>
     label === currentScoreRange ? "#FF5733" : "#36A2EB"
   );
-
   const chartData = {
     labels,
     datasets: [
@@ -94,7 +100,6 @@ const ExamResults = () => {
       },
     ],
   };
-
   console.log("Chart Labels:", chartData.labels);
   console.log("Chart Data:", chartData.datasets[0].data);
 
@@ -119,6 +124,10 @@ const ExamResults = () => {
         <div className="stat-box">
           <p>Your Score</p>
           <h3>{examResult.totalScore}</h3>
+        </div>
+        <div className="stat-box">
+          <p>Your Rank</p>
+          <h3>{examResult.rank}</h3>
         </div>
         <div className="stat-box">
           <p>Correct Answers</p>
