@@ -1,0 +1,123 @@
+#loading-summary {
+  font-size: 22px;
+  color: #ff5722;
+  text-align: center;
+  margin-top: 20px;
+  font-weight: bold;
+  animation: fadeIn 1s ease-in-out;
+  text-transform: uppercase;
+}
+
+#summary-container {
+  width: 135%;
+  margin: 20px auto;
+  padding: 30px;
+  margin-left: 10px;
+  background: linear-gradient(135deg, #010101, #112648);
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease-in-out;
+  
+}
+
+#summary-container:hover {
+  transform: scale(1.01);
+}
+
+#summary-title {
+  text-align: center;
+  font-size: 28px;
+  color: #ffffff;
+  margin-bottom: 25px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+#score {
+  font-size: 24px;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+#obtained-marks {
+  color: #4caf50;
+  font-weight: bold;
+  font-size: 26px;
+}
+
+#total-marks {
+  color: #ff5722;
+  font-weight: bold;
+  font-size: 26px;
+}
+
+#questions-list {
+  margin-top: 30px;
+}
+
+#question-card-id {
+  background-color: rgba(6, 5, 5, 0.15);
+  padding: 20px;
+  width: 70%;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  margin-bottom: 20px;
+  transition: all 0.3s ease-in-out;
+}
+
+#question-card-id:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+  transform: scale(1.01);
+}
+
+.correct {
+  color: #4caf50;
+  font-weight: bold;
+  font-size: 20px;
+  text-shadow: 1px 1px 4px rgba(76, 175, 80, 0.6);
+}
+
+.incorrect {
+  color: #ff1100;
+  font-size: 20px;
+  
+}
+
+/* Dynamically generated question elements */
+[id^="question-card-"] {
+  border-left: 7px solid #1e88e5;
+  padding-left: 14px;
+}
+
+[id^="question-text-"] {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+[id^="user-response-"] {
+  font-size: 18px;
+  color: #e0e0e0;
+}
+
+[id^="correct-response-"] {
+  font-size: 18px;
+  color: #069d1d;
+  font-weight: bold;
+}
+
+[id^="answer-status-"] {
+  font-size: 18px;
+}
+
+[id^="marks-awarded-"] {
+  font-size: 18px;
+  font-weight: bold;
+  color: #ff9800;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
