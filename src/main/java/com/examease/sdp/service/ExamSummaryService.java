@@ -1,12 +1,13 @@
 package com.examease.sdp.service;
 
-import com.examease.sdp.DTO.ExamSummaryDTO;
-import com.examease.sdp.DTO.QuestionSummaryDTO;
+import com.examease.sdp.DTO.ExamSummaryResponse;
+import com.examease.sdp.DTO.QuestionSummaryResponse;
 import com.examease.sdp.model.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -15,27 +16,51 @@ public class ExamSummaryService {
     @Autowired
     private SubmissionRepo submissionRepo;
 
-    public ExamSummaryDTO getExamSummary(Long submissionId) {
+    public ExamSummaryResponse getExamSummary(Long submissionId) {
         Submission submission = submissionRepo.findById(submissionId)
                 .orElseThrow(() -> new RuntimeException("Submission not found"));
 
-        List<QuestionSummaryDTO> questionSummaries = submission.getAnswers().stream().map(answer -> {
+        Long examId = submission.getExam().getId();
+
+        // Fetch all answers from the topper's submission
+        List<StudentAnswer> topperAnswersList = submissionRepo.findTopperAnswers(examId);
+
+        // Map topper answers for quick lookup
+        Map<Long, StudentAnswer> topperAnswersMap = topperAnswersList.stream()
+                .collect(Collectors.toMap(
+                        a -> a.getQuestion().getId(),
+                        a -> a,
+                        (existing, replacement) -> existing  // Ignore duplicate answers, keep the first one
+                ));
+
+        List<QuestionSummaryResponse> questionSummaries = submission.getAnswers().stream().map(answer -> {
             Question question = answer.getQuestion();
             Option selectedOption = answer.getSelectedOption();
             Option correctOption = question.getCorrectOption();
-            boolean isCorrect = correctOption.getId().equals(selectedOption.getId());
-            int marksAwarded = isCorrect ? 4 : -1; // Assuming +4 for correct, -1 for incorrect.
+            boolean isCorrect = selectedOption.getId().equals(correctOption.getId());
+            int marksAwarded = isCorrect ? 4 : -1;
 
-            return new QuestionSummaryDTO(
+            // Retrieve the correct topper answer
+            StudentAnswer topperAnswer = topperAnswersMap.get(question.getId());
+            String topperResponse = (topperAnswer != null) ? topperAnswer.getSelectedOption().getText() : "N/A";
+            double topperTimeTaken = (topperAnswer != null) ? topperAnswer.getTimeSpent() : 0.0;
+
+            // ✅ Include user's time spent on the question
+            double userTimeTaken = answer.getTimeSpent();
+
+            return new QuestionSummaryResponse(
                     question.getText(),
                     selectedOption.getText(),
                     correctOption.getText(),
                     isCorrect,
-                    marksAwarded
+                    marksAwarded,
+                    topperResponse,
+                    topperTimeTaken,
+                    userTimeTaken // ✅ Add user time taken
             );
         }).collect(Collectors.toList());
 
-        return new ExamSummaryDTO(
+        return new ExamSummaryResponse(
                 submission.getTotalScore(),
                 submission.getCorrectAnswers(),
                 submission.getIncorrectAnswers(),
@@ -43,4 +68,5 @@ public class ExamSummaryService {
                 questionSummaries
         );
     }
+
 }

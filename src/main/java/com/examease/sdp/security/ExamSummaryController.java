@@ -1,6 +1,6 @@
 package com.examease.sdp.security;
 
-import com.examease.sdp.DTO.ExamSummaryDTO;
+import com.examease.sdp.DTO.ExamSummaryResponse;
 import com.examease.sdp.service.ExamSummaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +17,8 @@ public class ExamSummaryController {
     private ExamSummaryService examSummaryService;
 
     @GetMapping("/{submissionId}")
-    public ResponseEntity<ExamSummaryDTO> getExamSummary(@PathVariable Long submissionId) {
-        ExamSummaryDTO summary = examSummaryService.getExamSummary(submissionId);
+    public ResponseEntity<ExamSummaryResponse> getExamSummary(@PathVariable Long submissionId) {
+        ExamSummaryResponse summary = examSummaryService.getExamSummary(submissionId);
         return ResponseEntity.ok(summary);
     }
 }

@@ -2,12 +2,12 @@ package com.examease.sdp.DTO;
 
 import java.util.List;
 
-public class ExamSummaryDTO {
+public class ExamSummaryResponse {
     private int obtainedMarks;
     private int totalMarks;
-    private List<QuestionSummaryDTO> questions;
+    private List<QuestionSummaryResponse> questions;
 
-    public ExamSummaryDTO(int obtainedMarks, int totalMarks, int incorrectAnswers, Double totalTimeSpent, List<QuestionSummaryDTO> questions) {
+    public ExamSummaryResponse(int obtainedMarks, int totalMarks, int incorrectAnswers, Double totalTimeSpent, List<QuestionSummaryResponse> questions) {
         this.obtainedMarks = obtainedMarks;
         this.totalMarks = totalMarks;
         this.questions = questions;
@@ -32,11 +32,11 @@ public class ExamSummaryDTO {
         this.totalMarks = totalMarks;
     }
 
-    public List<QuestionSummaryDTO> getQuestions() {
+    public List<QuestionSummaryResponse> getQuestions() {
         return questions;
     }
 
-    public void setQuestions(List<QuestionSummaryDTO> questions) {
+    public void setQuestions(List<QuestionSummaryResponse> questions) {
         this.questions = questions;
     }
 }
