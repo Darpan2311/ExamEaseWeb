@@ -1,11 +1,11 @@
 .student {
   
   align-items: flex-start;
-
+  
   width: 100vw;
   display: flex;
   justify-content:space-between ;
-  height: 100vh;
+
   
 }
 
@@ -28,11 +28,12 @@
 }
 .container{
   padding: 0px;
+
   margin: 0px;
 }
 .home-content {
   padding: 40px;
-  margin-left: 300px;
+  margin-left: 100px;
   display: flex;
 
   width: 100%;

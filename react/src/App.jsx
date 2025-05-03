@@ -13,11 +13,11 @@ import StudentHome from './components/Studentdashboard';
 import Home from './components/Home';
 import Roleselect from './components/Roleselect';
 import ExamSummary from './components/ExamSummary';
-
-
+import StudentExamsDisplay from './components/StudentExamsDisplay';
+import StudentReports from './components/StudentReports';
+import SDashboard from './components/Sdashboard';
 
 function App() {
-  
 
   return (
    
@@ -30,14 +30,19 @@ function App() {
       <Route path="/exam/:examId" element={<ExamInterface />} />
       <Route path="/exam/create" element={<TestBuilder/>}/>
       <Route path="/result/:submissionId" element={<ExamResults/>}/>
-      <Route path='/student' element={<StudentHome/>}/>
+      <Route path="/student" element={<StudentHome />}>
+        <Route path="dashboard" element={<SDashboard />} />
+        <Route path="exams" element={<StudentExamsDisplay />} />
+        {/* <Route path="profile" element={<StudentProfile />} /> */}
+        <Route path="reports" element={<StudentReports />} />
+      </Route>
+
       <Route path='/api/auth/roleselect' element={<Roleselect/>}/>
       <Route path="/summary/:submissionId" element={<ExamSummary />} />
       <Route path='/' element={<Home/>}/>
     </Routes>
   </Router>
-      
-   
+
   )
 }
 

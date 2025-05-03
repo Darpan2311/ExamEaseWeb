@@ -109,15 +109,15 @@ const dataValues = sortedScores.map(([_, value]) => value);
         <h1>Exam Results</h1>
         <div className="exam-info">
           <p><b>Duration:</b> 3 hr</p>
-          <p><b>Total Marks:</b> {totalMarks}</p>
-          <p><b>Passing Marks:</b> {passingMarks} (30%)</p>
+          <p><b>Total Marks:</b> {12}</p>
+          <p><b>Passing Marks:</b> (30%)</p>
           <p><b>Marking Scheme:</b> +4/-1</p>
-          <p><b>Total Questions:</b> {totalQuestions}</p>
+          <p><b>Total Questions:</b> {3}</p>
         </div>
         
      <button className="review-button" onClick={viewAllAnswers}>
           View all Ans
-        </button>
+        </button> 
       </header>
 
       <section className="exam-summary">

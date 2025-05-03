@@ -1,7 +1,9 @@
 package com.examease.sdp.controller;
 
+import com.examease.sdp.DTO.ActivityDayDTO;
 import com.examease.sdp.DTO.ExamResultResponse;
 import com.examease.sdp.DTO.ExamSubmissionRequest;
+import com.examease.sdp.DTO.SubmissionDTO;
 import com.examease.sdp.model.*;
 import com.examease.sdp.service.ExamService;
 import com.examease.sdp.service.SubmissionService;
@@ -9,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -26,6 +30,8 @@ public class ExamController {
     private SubmissionService submissionService;
     @Autowired
     private SubmissionRepo submissionRepo;
+    @Autowired
+    private MyUserDetailService myUserDetailService;
 
     public ExamController(ExamService examService) {
         this.examService = examService;
@@ -125,7 +131,26 @@ public class ExamController {
 
         return ResponseEntity.ok(scoreDistribution);
     }
+    @GetMapping("/submissions/my")
+    public List<SubmissionDTO> getMySubmissions(@AuthenticationPrincipal UserDetails userDetails) {
+        String email = userDetails.getUsername();  // Extract email from authenticated user
+        Long userId = myUserDetailService.getUserId(email);  // Fetch the user ID using the service
 
+        if (userId != null) {
+            return submissionService.getSubmissionsByUser(userId);  // Fetch submissions by user ID
+        } else {
+            throw new RuntimeException("User not found");
+        }
+    }
+    @GetMapping("/submissions/my/activity")
+    public List<ActivityDayDTO> getMyActivity(@AuthenticationPrincipal UserDetails userDetails) {
+        String email = userDetails.getUsername();
+        Long userId = myUserDetailService.getUserId(email);
 
-
+        if (userId != null) {
+            return submissionService.getActivityLast90Days(userId);
+        } else {
+            throw new RuntimeException("User not found");
+        }
+    }
 }

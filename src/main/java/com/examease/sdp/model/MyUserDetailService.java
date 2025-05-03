@@ -32,7 +32,13 @@ public class MyUserDetailService implements UserDetailsService {
             throw new UsernameNotFoundException(email);
         }
     }
-
+    public Long getUserId(String email) {
+        Optional<MyUser> user = repository.findByEmail(email);
+        if (user.isPresent()) {
+            return user.get().getId();
+        }
+        return null; // Or throw exception if user is not found
+    }
     private String[] getRoles(MyUser user) {
         if (user.getRole() == null) {
             return new String[]{"USER"};
