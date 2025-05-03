@@ -121,24 +121,6 @@ export default function TestBuilder() {
 
   return (
     <div className="test-builder">
-      <aside className="sidebar1">
-        <div className="sidebar-header">
-          <h1 className="sidebar-title">ExamEase</h1>
-        </div>
-        <nav className="sidebar-nav">
-          {["Dashboard", "Test Builder", "Exams", "Reports"].map((item) => (
-            <button key={item} className={`sidebar-nav-item ${item === "Test Builder" ? "active" : ""}`}>
-              <span className="sidebar-nav-icon">
-                {item === "Dashboard" && "⌂"}
-                {item === "Test Builder" && "📝"}
-                {item === "Exams" && "📚"}
-                {item === "Reports" && "📊"}
-              </span>
-              <span>{item}</span>
-            </button>
-          ))}
-        </nav>
-      </aside>
       <main className="main-content">
         <div className="container">
           <header className="main-header">

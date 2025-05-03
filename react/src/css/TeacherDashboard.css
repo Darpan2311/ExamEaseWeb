@@ -1,0 +1,58 @@
+.student {
+  
+    align-items: flex-start;
+    
+    width: 100vw;
+    display: flex;
+    justify-content:space-between ;
+  
+    
+  }
+  
+  .home-container2 {
+    display: flex;
+    width: 100%;
+   }
+  
+  .home-sidebar2 {
+    display: flexbox;
+    padding-left: 20px;
+    align-items: center;
+    margin-top: 60px;
+    position: fixed;
+    background:linear-gradient(#000, #141418);
+    padding-top: 40px;
+    padding-left: 80px;
+    width: 250px;
+    height: 100%;
+  }
+  .container{
+    padding: 0px;
+    width: 100%;
+    margin: 0px;
+  }
+  #home-content {
+    padding: 40px;
+    margin-left: 300px;
+    display: flex;
+  
+    width: 80vw;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .subject-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 24px;
+    justify-content: center;
+    width: 100%;
+    max-width: 1080px;
+  }
+  
+  .home-title {
+    color: white;
+    margin-bottom: 2rem;
+  }
+  
+  
