@@ -5,7 +5,7 @@ import "../css/Teacherdashboard.css"
 const getActiveLabel = (pathname) => {
   if (pathname.includes("dashboard")) return "Dashboard";
   if (pathname.includes("/exams/create")) return "TestBuilder";
-  if (pathname.includes("exams")) return "Exams";
+  if (pathname.includes("createdexams")) return "ExamList";
   if (pathname.includes("reports")) return "Reports";
   return "";
 };
@@ -20,7 +20,7 @@ const TeacherHome = () => {
         <aside className="home-sidebar2">
         <TeacherSideBar/>
     </aside>
-    <main id="home-content">
+    <main id="home-content2">
         <Outlet />
       </main>
         </div>

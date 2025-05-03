@@ -152,4 +152,12 @@ public class ExamController {
             throw new RuntimeException("User not found");
         }
     }
+    @GetMapping("/teacher")
+
+    public List<Exam> getCreatedExams(@AuthenticationPrincipal UserDetails userDetails) {
+        String email = userDetails.getUsername();
+
+        return examService.getExamsCreatedBy(email);
+    }
+
 }

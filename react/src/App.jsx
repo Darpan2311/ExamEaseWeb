@@ -16,7 +16,8 @@ import ExamSummary from './components/ExamSummary';
 import StudentExamsDisplay from './components/StudentExamsDisplay';
 import StudentReports from './components/StudentReports';
 import SDashboard from './components/Sdashboard';
-
+import TeacherDashboard from './components/TeacherDashboard';
+import ExamList from './components/ExamList';
 function App() {
 
   return (
@@ -31,7 +32,7 @@ function App() {
       {/* <Route path="/exam/create" element={<TestBuilder/>}/> */}
       <Route path="/result/:submissionId" element={<ExamResults/>}/>
       <Route path="/student" element={<StudentHome />}>
-        <Route path="dashboard" element={<SDashboard />} />
+        <Route index element={<SDashboard />} />
         <Route path="exams" element={<StudentExamsDisplay />} />
         {/* <Route path="profile" element={<StudentProfile />} /> */}
         <Route path="reports" element={<StudentReports />} />
@@ -39,7 +40,7 @@ function App() {
       <Route path="/teacher" element={<TeacherHome />}>
         {/* <Route path="dashboard" element={<TeacherDashboard />} /> */}
         <Route path="exam/create" element={<TestBuilder/>} />
-        {/* <Route path="exams" element={<ExamList />} /> */}
+        <Route path="createdexams" element={<ExamList />} />
         {/* <Route path="reports" element={<ReportPage />} /> */}
       </Route>
 

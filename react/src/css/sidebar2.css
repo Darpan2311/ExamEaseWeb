@@ -52,11 +52,13 @@
   }
   
   /* Sidebar Navigation */
-  .sidebar-nav {
+  .sidebar-nav2 {
     display: flex;
     flex-direction: column;
     gap: 10px;
     width: 100%;
+    margin-top: 100px;
+    padding-left: 31px;
   }
   
   .sidebar-nav-item2 {

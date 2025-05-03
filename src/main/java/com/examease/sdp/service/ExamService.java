@@ -65,6 +65,11 @@ public class ExamService {
         });
         return questions;
     }
+
+    public List<Exam> getExamsCreatedBy(String username) {
+        return examRepository.findAllByAuthor(username);
+
+    }
 }
 
    
