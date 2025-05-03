@@ -1,0 +1,28 @@
+.react-calendar-heatmap text {
+    font-size: 10px;
+    fill: #6b7280; /* neutral gray */
+  }
+  
+  .color-empty {
+    fill: #e5e7eb; /* light gray */
+  }
+  
+  .color-scale-1 {
+    fill: #bae6fd; /* light blue */
+  }
+  
+  .color-scale-2 {
+    fill: #60a5fa; /* medium blue */
+  }
+  
+  .color-scale-3 {
+    fill: #2563eb; /* dark blue */
+  }
+  
+  .react-calendar-heatmap .react-calendar-heatmap-week > rect {
+    rx: 3px;
+    ry: 3px;
+    stroke: white;
+    stroke-width: 1;
+  }
+  

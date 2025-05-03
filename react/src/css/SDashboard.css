@@ -1,0 +1,20 @@
+.student-dashboard {
+    
+    margin-left: 250px;
+  }
+  
+  .welcome-banner {
+    margin-bottom: 2rem;
+    text-align: left;
+  }
+  
+  .dashboard-section {
+    margin-bottom: 2rem;
+  }
+  
+  .subject-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  
