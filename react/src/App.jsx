@@ -36,6 +36,12 @@ function App() {
         {/* <Route path="profile" element={<StudentProfile />} /> */}
         <Route path="reports" element={<StudentReports />} />
       </Route>
+      <Route path="/teacher" element={<TeacherHome />}>
+        <Route path="dashboard" element={<SDashboard />} />
+        <Route path="exams" element={<StudentExamsDisplay />} />
+        {/* <Route path="profile" element={<StudentProfile />} /> */}
+        <Route path="reports" element={<StudentReports />} />
+      </Route>
 
       <Route path='/api/auth/roleselect' element={<Roleselect/>}/>
       <Route path="/summary/:submissionId" element={<ExamSummary />} />

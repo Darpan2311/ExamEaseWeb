@@ -22,18 +22,25 @@ const LoginPage = () => {
             });
     
             if (response.status === 200) {
-                const token = response.data;
+              
     
+                const { token, roles } = response.data;
+
                 if (token) {
                     localStorage.setItem("jwtToken", token);
                     console.log("Login successful, token saved");
-    
-                    
-                            navigate("/student");
-                        
+                
+                    if (roles.includes("TEACHER")) {
+                        navigate("/teacher");
+                    } else if (roles.includes("USER") || roles.includes("STUDENT")) {
+                        navigate("/student");
+                    } else {
+                        navigate("/home"); // fallback
+                    }
                 } else {
                     setErrorMessage("Failed to retrieve token.");
                 }
+                
             } else {
                 setErrorMessage("Unexpected response from server.");
             }
@@ -48,8 +55,6 @@ const LoginPage = () => {
         window.location.href = googleOAuthUrl;
     };
     
-    
-
     return (
         <div className='login'>
         <div className="login-container">

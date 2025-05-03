@@ -1,4 +1,4 @@
-package com.examease.sdp.security;
+package com.examease.sdp.controller;
 
 import com.examease.sdp.DTO.ExamSummaryResponse;
 import com.examease.sdp.service.ExamSummaryService;

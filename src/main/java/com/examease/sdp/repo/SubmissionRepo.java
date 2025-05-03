@@ -1,12 +1,13 @@
-package com.examease.sdp.model;
+package com.examease.sdp.repo;
 
+import com.examease.sdp.model.StudentAnswer;
+import com.examease.sdp.model.Submission;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 public interface SubmissionRepo extends JpaRepository<Submission, Long> {
 

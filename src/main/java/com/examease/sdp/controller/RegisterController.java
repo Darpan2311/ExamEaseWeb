@@ -1,8 +1,10 @@
-package com.examease.sdp.security;
+package com.examease.sdp.controller;
 
 import com.examease.sdp.DTO.RegisterRequest;
 import com.examease.sdp.model.MyUser;
-import com.examease.sdp.model.MyUserRepo;
+import com.examease.sdp.repo.MyUserRepo;
+import com.examease.sdp.service.EmailService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,9 +14,11 @@ import java.util.UUID;
 @RequestMapping("/api/auth")
 @CrossOrigin(origins = "http://localhost:5173")  // Adjust as needed
 public class RegisterController {
-
+    @Autowired
     private final MyUserRepo userRepo;
+    @Autowired
     private final PasswordEncoder passwordEncoder;
+    @Autowired
     private final EmailService emailService;
 
     public RegisterController(MyUserRepo userRepo, PasswordEncoder passwordEncoder, EmailService emailService) {

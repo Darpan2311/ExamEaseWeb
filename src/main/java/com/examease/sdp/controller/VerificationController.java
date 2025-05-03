@@ -1,7 +1,7 @@
-package com.examease.sdp.security;
+package com.examease.sdp.controller;
 
 import com.examease.sdp.model.MyUser;
-import com.examease.sdp.model.MyUserRepo;
+import com.examease.sdp.repo.MyUserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

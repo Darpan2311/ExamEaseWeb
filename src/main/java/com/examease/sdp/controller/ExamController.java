@@ -5,15 +5,14 @@ import com.examease.sdp.DTO.ExamResultResponse;
 import com.examease.sdp.DTO.ExamSubmissionRequest;
 import com.examease.sdp.DTO.SubmissionDTO;
 import com.examease.sdp.model.*;
+import com.examease.sdp.repo.SubmissionRepo;
 import com.examease.sdp.service.ExamService;
 import com.examease.sdp.service.SubmissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 

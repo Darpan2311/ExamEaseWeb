@@ -1,4 +1,4 @@
-package com.examease.sdp.model;
+package com.examease.sdp.repo;
 
 import com.examease.sdp.model.Exam;
 import org.springframework.data.jpa.repository.JpaRepository;

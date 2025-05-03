@@ -2,7 +2,9 @@
 package com.examease.sdp.service;
 
 import com.examease.sdp.model.*;
-        import org.springframework.beans.factory.annotation.Autowired;
+import com.examease.sdp.repo.ExamRepo;
+import com.examease.sdp.repo.QuestionRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -1,8 +1,9 @@
-package com.examease.sdp.security;
+package com.examease.sdp.controller;
 
 import com.examease.sdp.model.MyUser;
 import com.examease.sdp.model.MyUserDetailService;
-import com.examease.sdp.model.MyUserRepo;
+import com.examease.sdp.repo.MyUserRepo;
+import com.examease.sdp.service.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;

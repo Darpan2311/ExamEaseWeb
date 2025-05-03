@@ -48,11 +48,12 @@ const Roleselect = () => {
             const { token } = response.data;
             localStorage.setItem("jwtToken", token);
             try {
-                const protectedResponse = await axiosInstance.get("/user/home");
-                if (protectedResponse.status === 200) {
-                    navigate("/home");
+                if (formData.role.includes("TEACHER")) {
+                    navigate("/teacherdashboard");
+                } else if (formData.role.includes("USER")) {
+                    navigate("/student");
                 } else {
-                    setErrorMessage("Failed to validate token.");
+                    navigate("/home");
                 }
             } catch (protectedError) {
                 console.error("Token validation failed:", protectedError);

@@ -1,5 +1,6 @@
-package com.examease.sdp.model;
+package com.examease.sdp.repo;
 
+import com.examease.sdp.model.MyUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

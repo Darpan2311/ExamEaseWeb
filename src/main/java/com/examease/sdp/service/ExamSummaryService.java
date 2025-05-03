@@ -4,6 +4,7 @@ import com.examease.sdp.DTO.ExamSummaryResponse;
 import com.examease.sdp.DTO.QuestionSummaryResponse;
 import com.examease.sdp.model.*;
 
+import com.examease.sdp.repo.SubmissionRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;

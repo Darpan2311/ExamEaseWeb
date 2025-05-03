@@ -69,7 +69,7 @@ const ExamResults = () => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p className="error">{error}</p>;
 
-  const totalQuestions = examResult.correctAnswer + examResult.incorrectAnswers + examResult.unattemptedQuestion;
+  const totalQuestions = examResult.correctAnswers + examResult.incorrectAnswers + examResult.unattemptedQuestion;
   const totalMarks = totalQuestions * 4;
   const passingMarks = (totalMarks * 0.3).toFixed(2);
   const isPassed = examResult.totalScore >= passingMarks;

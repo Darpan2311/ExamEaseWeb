@@ -1,4 +1,4 @@
-package com.examease.sdp.security;
+package com.examease.sdp.service;
 
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;

@@ -34,7 +34,8 @@ public class SecurityConfiguration {
                 .csrf(csrf -> csrf.disable())  // Disable CSRF as you are using JWT
                 .authorizeHttpRequests(auth -> {
                     auth.requestMatchers("/authenticate", "/api/auth/**", "/register/user", "/css/**","/verify-email").permitAll(); // Permit authentication and registration
-                    auth.requestMatchers("/admin/**").hasRole("ADMIN"); // Role-based access
+                    auth.requestMatchers("/teacher/**").hasRole("TEACHER");
+                    auth.requestMatchers("/api/exams/crate").hasRole("TEACHER");// Role-based access
                     auth.requestMatchers("/user/**").hasRole("USER");
                     auth.anyRequest().authenticated(); // All other requests require authentication
                 })
