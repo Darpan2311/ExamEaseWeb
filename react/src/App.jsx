@@ -38,7 +38,7 @@ function App() {
         <Route path="reports" element={<StudentReports />} />
       </Route>
       <Route path="/teacher" element={<TeacherHome />}>
-        {/* <Route path="dashboard" element={<TeacherDashboard />} /> */}
+        <Route path="dashboard" element={<TeacherDashboard />} />
         <Route path="exam/create" element={<TestBuilder/>} />
         <Route path="createdexams" element={<ExamList />} />
         {/* <Route path="reports" element={<ReportPage />} /> */}

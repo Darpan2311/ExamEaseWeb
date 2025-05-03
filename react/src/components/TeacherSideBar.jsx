@@ -22,8 +22,8 @@
           navigate(path, { replace: true });
         } else {
           navigate(path);
-        }
-      };
+        }
+    };
 
     return (
         <div className="sidebar-header">

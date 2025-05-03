@@ -1,9 +1,6 @@
 package com.examease.sdp.controller;
 
-import com.examease.sdp.DTO.ActivityDayDTO;
-import com.examease.sdp.DTO.ExamResultResponse;
-import com.examease.sdp.DTO.ExamSubmissionRequest;
-import com.examease.sdp.DTO.SubmissionDTO;
+import com.examease.sdp.DTO.*;
 import com.examease.sdp.model.*;
 import com.examease.sdp.repo.SubmissionRepo;
 import com.examease.sdp.service.ExamService;
@@ -152,6 +149,14 @@ public class ExamController {
             throw new RuntimeException("User not found");
         }
     }
+    @GetMapping("/teacher/activity")
+    public List<ExamSubmissionCountDTO> getTeacherActivity(@AuthenticationPrincipal UserDetails userDetails) {
+        String email = userDetails.getUsername();
+        return submissionService.getTeacherExamActivity(email);
+    }
+
+
+
     @GetMapping("/teacher")
 
     public List<Exam> getCreatedExams(@AuthenticationPrincipal UserDetails userDetails) {

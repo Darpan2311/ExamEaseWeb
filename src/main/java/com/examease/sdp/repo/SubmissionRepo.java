@@ -1,5 +1,6 @@
 package com.examease.sdp.repo;
 
+import com.examease.sdp.DTO.ExamSubmissionCountDTO;
 import com.examease.sdp.model.StudentAnswer;
 import com.examease.sdp.model.Submission;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -22,5 +23,11 @@ public interface SubmissionRepo extends JpaRepository<Submission, Long> {
     List<StudentAnswer> findTopperAnswers(@Param("examId") Long examId);
     List<Submission> findBystudent_id(Long userId);
     List<Submission> findBystudent_idAndSubmittedAtBetween(Long userId, LocalDateTime start, LocalDateTime end);
+    @Query("SELECT new com.examease.sdp.DTO.ExamSubmissionCountDTO(s.exam.name, COUNT(s)) " +
+            "FROM Submission s " +
+            "WHERE s.exam.author = :author " +
+            "GROUP BY s.exam.name")
+    List<ExamSubmissionCountDTO> countSubmissionsByExamAuthor(@Param("author") String author);
+
 
 }

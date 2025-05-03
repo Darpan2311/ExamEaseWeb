@@ -1,6 +1,7 @@
 package com.examease.sdp.service;
 
 import com.examease.sdp.DTO.ActivityDayDTO;
+import com.examease.sdp.DTO.ExamSubmissionCountDTO;
 import com.examease.sdp.DTO.StudentAnswerRequest;
 import com.examease.sdp.DTO.SubmissionDTO;
 import com.examease.sdp.model.*;
@@ -132,5 +133,10 @@ public class SubmissionService {
 
         return result;
     }
+
+    public List<ExamSubmissionCountDTO> getTeacherExamActivity(String author) {
+        return submissionRepo.countSubmissionsByExamAuthor(author);
+    }
+
 
 }
