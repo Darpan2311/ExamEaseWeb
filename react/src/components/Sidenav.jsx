@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import '../css/Sidenav.css';
 
-const Sidenav = () => {
+const  Sidenav = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -23,9 +23,17 @@ const Sidenav = () => {
   }, [location]);
 
   const handleNavigation = (path) => {
-    navigate(path);
+    if (path === "/login") {
+      // Clear any login data here (like token, localStorage, etc.)
+      localStorage.clear(); // or sessionStorage.clear()
+      
+      // Redirect with history replacement
+      navigate(path, { replace: true });
+    } else {
+      navigate(path);
+    }
   };
-
+  
   return (
     <div className="sidebar-header">
       <nav className="sidebar-nav">

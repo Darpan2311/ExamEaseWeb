@@ -18,6 +18,7 @@ import StudentReports from './components/StudentReports';
 import SDashboard from './components/Sdashboard';
 import TeacherDashboard from './components/TeacherDashboard';
 import ExamList from './components/ExamList';
+import TeacherExamInterface from './components/TeacherExamInterface';
 function App() {
 
   return (
@@ -29,6 +30,8 @@ function App() {
       <Route path='/api/auth/callback' element={<GoogleAuthCallback/>}/>
       <Route path="/api/auth/login/callback" element={<GoogleLoginCallback/>}/>
       <Route path="/exam/:examId" element={<ExamInterface />} />
+      <Route path="/teacherexam/:examId" element={<TeacherExamInterface />} />
+
       {/* <Route path="/exam/create" element={<TestBuilder/>}/> */}
       <Route path="/result/:submissionId" element={<ExamResults/>}/>
       <Route path="/student" element={<StudentHome />}>
@@ -41,7 +44,6 @@ function App() {
         <Route path="dashboard" element={<TeacherDashboard />} />
         <Route path="exam/create" element={<TestBuilder/>} />
         <Route path="createdexams" element={<ExamList />} />
-        {/* <Route path="reports" element={<ReportPage />} /> */}
       </Route>
 
       <Route path='/api/auth/roleselect' element={<Roleselect/>}/>

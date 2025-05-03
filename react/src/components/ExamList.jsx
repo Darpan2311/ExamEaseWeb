@@ -1,8 +1,8 @@
 
 import React, { useEffect, useState } from "react";
-import { ExamCard } from "../components/ExamCard";
 import axiosInstance from "../axiosConfig";
 import '../css/Teacherdashboard.css'
+import { TeacherCard } from "../components/TeacherCard";
 function ExamList() {
 
     const [exams, setExams] = useState([]); // Ensure exams is an array
@@ -39,7 +39,7 @@ function ExamList() {
               <div className="subject-grid">
                 {exams.length > 0 ? (
                 exams.map((exam, index) => (
-                  <ExamCard
+                  <TeacherCard
                     key={index}
                     name={exam.name}
                     id={exam.id}
@@ -57,7 +57,7 @@ function ExamList() {
           </div>
         </div>
     </div>
-  )
+  );
 }
 
-export default ExamList
+export default ExamList;

@@ -49,7 +49,7 @@ const Roleselect = () => {
             localStorage.setItem("jwtToken", token);
             try {
                 if (formData.role.includes("TEACHER")) {
-                    navigate("/teacherdashboard");
+                    navigate("/teacher");
                 } else if (formData.role.includes("USER")) {
                     navigate("/student");
                 } else {
