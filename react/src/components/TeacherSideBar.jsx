@@ -4,7 +4,7 @@
     const navigate = useNavigate();
 
     const navItems = [
-        { label: "Dashboard", icon: "⌂", path: "/teacher/dashboard" },
+        { label: "Dashboard", icon: "⌂", path: "" },
         { label: "Test Builder", icon: "📝", path: "exam/create" },
         { label: "Exams", icon: "📚", path: "createdexams" },
         { label: "Reports", icon: "📊", path: "/admin/reports" },
@@ -15,10 +15,8 @@
 
     const handleNavigation = (path) => {
         if (path === "/login") {
-          // Clear any login data here (like token, localStorage, etc.)
-          localStorage.clear(); // or sessionStorage.clear()
+          localStorage.clear();          
           
-          // Redirect with history replacement
           navigate(path, { replace: true });
         } else {
           navigate(path);

@@ -7,7 +7,7 @@ const  Sidenav = () => {
   const location = useLocation();
 
   const menuItems = [
-    { name: "Dashboard", emoji: "📊", path: "dashboard" },
+    { name: "Dashboard", emoji: "📊", path: "" },
     { name: "Exams", emoji: "📝", path: "exams" },
     { name: "Profile", emoji: "👤", path: "profile" },
     { name: "Reports", emoji: "📑", path: "reports" },
